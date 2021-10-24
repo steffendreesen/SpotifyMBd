@@ -1,0 +1,79 @@
+---
+title: "genre_averages.Rmd"
+author: "Steffen Dreesen"
+date: "10/24/2021"
+---
+
+```{r load data}
+# constants 
+num_attributes <- 11
+num_genres <- 26
+num_movies <- 4870
+
+
+# load the csv data into a dataframe
+data <- read.csv("Main_3_no_songs.csv")
+
+# extract attribute names
+# 'Avg_valence', 'Avg_Danceability', ... , 'Avg_Tempo'
+attributes <- colnames(data)[6:16]
+
+```
+
+```{r get all genres}
+
+# all 3 genres for each movie
+all_movie_genres <- unlist(data[, 2:4])
+
+# list all genres in the dataset
+# [-26] Keeps all values except the 26th, which is 'N/A' 
+genres <- unique(all_movie_genres)[-26]
+
+```
+
+```{r prepare dataframe to store averages}
+# empty dataframe to store values. Columns are genres, rows are attributes
+averages <- data.frame(matrix(, nrow=num_attributes, ncol=num_genres))
+
+# rename column names to the genres
+colnames(averages) <- genres
+
+# add a row of attribute names
+averages <- cbind(attributes, averages)
+
+```
+
+```{r compute attributes}
+
+for(genre in genres){
+  
+  # 4870 x 1 vector to track which movies are in the current genre
+  is_in_genre <- logical(num_movies)
+  
+  # R indexing starts at 1 and is inclusive
+  for(row in 1:num_movies){
+    
+    # genres for current movie
+    movie_genres <- data[row, 2:4]
+    
+    # True if a movie is in genre
+    is_in_genre[row] <- is.element(genre, movie_genres)
+    
+  }
+  
+  # filter attributes of all movies of the current genre
+  movies_in_genre <- data[is_in_genre, ][6:16]
+  
+  # update averages
+  averages[genre] <- colMeans(movies_in_genre)
+  
+}
+
+# remove the extra column 'genre' in averages
+averages <- averages[-28]
+
+```
+
+```{r save averages}
+write.csv(averages, "Genre_average_attributes.csv")
+```
