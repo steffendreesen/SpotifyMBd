@@ -1,8 +1,11 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8"/>
-        <title>Group 5 project</title>
+        <title>Group 5 Project</title>
+        <script src="https://d3js.org/d3.v4.js"></script>
+        <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="styles.css" />
     </head>  
     <body>
         <style> 
@@ -12,11 +15,15 @@
             h2 {
                 text-align: left;
             }
-            body{
+            /* body{
                 background-color: blanchedalmond;
-            }
+            } */
         </style>
-        <h1>Correlation between movie genre and songs in sound track (interactive)</h1>
+        <h1>Scatterplot with interactive axis attributes (not interactive yet)</h1>
+
+        <svg id="scatterplot"></svg>
+        <script src="scatterplot.js"></script>
+
         <h2>Film Genre Soundtrack Similarity Matrix</h2>
         
         <svg>
@@ -34,19 +41,4 @@
         xmlns="http://www.w3.org/2000/svg">
         </svg>  
     </body>  
-</html> -->
-
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Scatterplot</title>
-    <script src="https://d3js.org/d3.v4.js"></script>
-    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="styles.css" />
-  </body>
-  </head>
-  <body>
-    <svg id="scatterplot"></svg>
-    <script src="scatterplot.js"></script>   
 </html>

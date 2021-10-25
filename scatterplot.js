@@ -6,7 +6,7 @@ d3.csv("movie_data.csv", function (dataset) {
       right: 80,
       left: 60,
     },
-    width: 1200,
+    width: 1300,
     height: 700,
   };
 
@@ -72,16 +72,6 @@ d3.csv("movie_data.csv", function (dataset) {
         .duration("100")
         .attr("r", circleRadius * 4);
       div.transition().duration(100).style("opacity", 1);
-      console.log(
-        titleAccessor(d) +
-          " (" +
-          genreAccessor(d) +
-          ") : (" +
-          xAccessor(d) +
-          "," +
-          yAccessor(d) +
-          ")"
-      );
       div
         .html(
           titleAccessor(d) +
@@ -116,7 +106,7 @@ d3.csv("movie_data.csv", function (dataset) {
     .append("text")
     .attr("class", "axis-label")
     .attr("y", 40)
-    .attr("x", innerWidth / 2)
+    .attr("x", dimensions.width / 2)
     .attr("fill", "black")
     .text(xAxisLabel);
 
