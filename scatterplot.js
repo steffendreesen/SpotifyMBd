@@ -1,4 +1,19 @@
 d3.csv("movie_data.csv", function (dataset) {
+  //converting all values to numbers (d3.csv converts to String, need them to be numeric)
+  dataset.forEach((d) => {
+    d.Avg_Valence = +d.Avg_Valence;
+    d.Avg_Danceability = +d.Avg_Danceability;
+    d.Avg_Energy = +d.Avg_Energy;
+    d.Avg_Key = +d.Avg_Key;
+    d.Avg_Loudness = +d.Avg_Loudness;
+    d.Avg_Mode = +d.Avg_Mode;
+    d.Avg_Speechiness = +d.Avg_Speechiness;
+    d.Avg_Acousticness = +d.Avg_Acousticness;
+    d.Avg_Instrumentallness = +d.Avg_Instrumentallness;
+    d.Avg_Liveness = +d.Avg_Liveness;
+    d.Avg_Tempo = +d.Avg_Tempo;
+  });
+
   var dimensions = {
     margin: {
       top: 30,
@@ -26,12 +41,88 @@ d3.csv("movie_data.csv", function (dataset) {
     .attr("class", "tooltip")
     .style("opacity", 0);
 
+  //changing these vars will change the x and y axis in the scatterplot
+  var x_attribute = "Average Energy";
+  var y_attribute = "Average Loudness";
+
   var titleAccessor = (d) => d.Title;
   var genreAccessor = (d) => d.Genre_1;
-  var xAccessor = (d) => d.Avg_Valence;
-  var xAxisLabel = "Average Valence";
-  var yAccessor = (d) => d.Avg_Danceability;
-  var yAxisLabel = "Average Danceability";
+
+  var xAccessor;
+  switch (x_attribute) {
+    case "Average Valence":
+      xAccessor = (d) => d.Avg_Valence;
+      break;
+    case "Average Danceability":
+      xAccessor = (d) => d.Avg_Danceability;
+      break;
+    case "Average Energy":
+      xAccessor = (d) => d.Avg_Energy;
+      break;
+    case "Average Key":
+      xAccessor = (d) => d.Avg_Key;
+      break;
+    case "Average Loudness":
+      xAccessor = (d) => d.Avg_Loudness;
+      break;
+    case "Average Mode":
+      xAccessor = (d) => d.Avg_Mode;
+      break;
+    case "Average Speechiness":
+      xAccessor = (d) => d.Avg_Speechiness;
+      break;
+    case "Average Acousticness":
+      xAccessor = (d) => d.Avg_Acousticness;
+      break;
+    case "Average Instrumentallness":
+      xAccessor = (d) => d.Avg_Instrumentallness;
+      break;
+    case "Average Liveness":
+      xAccessor = (d) => d.Avg_Liveness;
+      break;
+    case "Average Tempo":
+      xAccessor = (d) => d.Avg_Tempo;
+      break;
+  }
+  var xAxisLabel = x_attribute;
+
+  var yAccessor;
+  switch (y_attribute) {
+    case "Average Valence":
+      yAccessor = (d) => d.Avg_Valence;
+      break;
+    case "Average Danceability":
+      yAccessor = (d) => d.Avg_Danceability;
+      break;
+    case "Average Energy":
+      yAccessor = (d) => d.Avg_Energy;
+      break;
+    case "Average Key":
+      yAccessor = (d) => d.Avg_Key;
+      break;
+    case "Average Loudness":
+      yAccessor = (d) => d.Avg_Loudness;
+      break;
+    case "Average Mode":
+      yAccessor = (d) => d.Avg_Mode;
+      break;
+    case "Average Speechiness":
+      yAccessor = (d) => d.Avg_Speechiness;
+      break;
+    case "Average Acousticness":
+      yAccessor = (d) => d.Avg_Acousticness;
+      break;
+    case "Average Instrumentallness":
+      yAccessor = (d) => d.Avg_Instrumentallness;
+      break;
+    case "Average Liveness":
+      yAccessor = (d) => d.Avg_Liveness;
+      break;
+    case "Average Tempo":
+      yAccessor = (d) => d.Avg_Tempo;
+      break;
+  }
+  var yAxisLabel = y_attribute;
 
   var xScale = d3
     .scaleLinear()
