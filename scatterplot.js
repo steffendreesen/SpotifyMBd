@@ -45,6 +45,37 @@ d3.csv("movie_data.csv", function (dataset) {
   var x_attribute = "Average Energy";
   var y_attribute = "Average Loudness";
 
+  //genres to exclude
+  //NOTE: discovered that Horror and Western are both light purple
+  var genreExclusionSet = new Set();
+  /*
+  genreExclusionSet.add("Drama");
+  genreExclusionSet.add("Comedy");
+  genreExclusionSet.add("Action");
+  genreExclusionSet.add("Documentary");
+  genreExclusionSet.add("Adventure");
+  genreExclusionSet.add("Adult");
+  genreExclusionSet.add("Short");
+  genreExclusionSet.add("Romance");
+  genreExclusionSet.add("Family");
+  genreExclusionSet.add("History");
+  genreExclusionSet.add("Crime");
+  genreExclusionSet.add("Animation");
+  genreExclusionSet.add("Mystery");
+  genreExclusionSet.add("Biography");
+  genreExclusionSet.add("News");
+  genreExclusionSet.add("Sci-Fi");
+  genreExclusionSet.add("Musical");
+  genreExclusionSet.add("Sport");
+  genreExclusionSet.add("Fantasy");
+  genreExclusionSet.add("Music");
+  genreExclusionSet.add("Game-Show");
+  genreExclusionSet.add("Reality-TV");
+  genreExclusionSet.add("Horror");
+  genreExclusionSet.add("Thriller");
+  genreExclusionSet.add("Western");
+  */
+
   var titleAccessor = (d) => d.Title;
   var genreAccessor = (d) => d.Genre_1;
 
@@ -154,7 +185,13 @@ d3.csv("movie_data.csv", function (dataset) {
     .attr("fill", (d) => {
       return myColor(d.Genre_1);
     })
-    .attr("r", circleRadius);
+    .attr("r", (d) => {
+      if (genreExclusionSet.has(genreAccessor(d))) {
+        return 0;
+      } else {
+        return circleRadius;
+      }
+    });
 
   dots
     .on("mouseover", function (d, i) {
