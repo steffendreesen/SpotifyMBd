@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Group 5 Project</title>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+  </head>
+  <body>
+    <style>
+      h1 {
+        text-align: center;
+      }
+      h2 {
+        text-align: left;
+      }
+      .dropbtn{
+        background-color: #4CAF50;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+      }
+      .dropdown {
+      position: relative;
+      display: inline-block;
+      }
+      .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+      }
+      /* Links inside the dropdown */
+      .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      }
+      .dropdown-content a:hover {background-color: #f1f1f1}
+      .dropdown:hover .dropdown-content {
+      display: block;
+      }
+      /* Change the background color of the dropdown button when the dropdown content is shown */
+      .dropdown:hover .dropbtn {
+      background-color: #3e8e41;
+      }
+
+      /* body{
+                background-color: blanchedalmond;
+            } */
+    </style>
+    <h1>Scatterplot with interactive axis attributes (not interactive yet)</h1>
+
+    <svg id="scatterplot"></svg>
+    <div class="dropdown">
+      <button class = "dropbtn">Dropdown</button>
+      <div class="dropdown-content">
+        <select id = "xSelector">
+          <option value="Average Energy">Average Energy</option>
+          <option value="Average Loudness">Average Loudness</option>
+          <option value="Average Valence">Average Valence</option>
+          <option value="Average Danceability">Average Danceability</option>
+          <option value="Average Energy">Average Energy</option>
+          <option value="Average Key">Average Key</option>
+          <option value="Average Loudness">Average Loudness</option>
+          <option value="Average Mode">Average Mode</option>
+          <option value="Average Speechiness">Average Speechiness</option>
+          <option value="Average Acousticness">Average Acousticness</option>
+          <option value="Average Instrumentallness">Average Instrumentallness</option>
+          <option value="Average Liveness">Average Liveness</option>
+          <option value="Average Tempo">Average Tempo</option>
+        </select>
+      </div>
+    </div>
+    <h1>Interactive Film Genre Soundtrack Attribute Analyzer</h1>
+    <svg
+      version="1.1"
+      width="300"
+      height="200"
+      xmlns="http://www.w3.org/2000/svg"
+    ></svg>
+    <h1>Song to Film Genre Fitness Chart</h1>
+    <svg
+      version="1.1"
+      width="300"
+      height="200"
+      xmlns="http://www.w3.org/2000/svg"
+    ></svg>
+  </body>
+  <script>
+        const xSelector = document.getElementById('xSelector');
+        xSelector.addEventListener('change', attributesSelector);
+        function attributesSelector()
+        {
+          console.log(xSelector.value);
+          console.log("function is being called");
+          return xSelector.value;
+        }
+  </script>
+  <script src="scatterplot.js"></script>
+</html>
+
