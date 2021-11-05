@@ -1,4 +1,11 @@
 d3.csv("movie_data.csv", function (dataset) {
+
+  var attributes_full = ["Average Valence", "Average Danceability", "Average Energy",
+                          "Average Key", "Average Loudness", "Average Mode", 
+                          "Average Speechiness", "Average Acousticness",
+                          "Average Instrumentallness", "Average Liveness", "Average Tempo"
+  ]
+
   //converting all values to numbers (d3.csv converts to String, need them to be numeric)
   dataset.forEach((d) => {
     d.Avg_Valence = +d.Avg_Valence;
@@ -41,10 +48,6 @@ d3.csv("movie_data.csv", function (dataset) {
     .attr("class", "tooltip")
     .style("opacity", 0);
 
-  //changing these vars will change the x and y axis in the scatterplot
-  var x_attribute = "Average Energy";
-  var y_attribute = "Average Loudness";
-
   //genres to exclude
   //NOTE: discovered that Horror and Western are both light purple
   var genreExclusionSet = new Set();
@@ -79,81 +82,100 @@ d3.csv("movie_data.csv", function (dataset) {
   var titleAccessor = (d) => d.Title;
   var genreAccessor = (d) => d.Genre_1;
 
-  var xAccessor;
-  switch (x_attribute) {
-    case "Average Valence":
-      xAccessor = (d) => d.Avg_Valence;
-      break;
-    case "Average Danceability":
-      xAccessor = (d) => d.Avg_Danceability;
-      break;
-    case "Average Energy":
-      xAccessor = (d) => d.Avg_Energy;
-      break;
-    case "Average Key":
-      xAccessor = (d) => d.Avg_Key;
-      break;
-    case "Average Loudness":
-      xAccessor = (d) => d.Avg_Loudness;
-      break;
-    case "Average Mode":
-      xAccessor = (d) => d.Avg_Mode;
-      break;
-    case "Average Speechiness":
-      xAccessor = (d) => d.Avg_Speechiness;
-      break;
-    case "Average Acousticness":
-      xAccessor = (d) => d.Avg_Acousticness;
-      break;
-    case "Average Instrumentallness":
-      xAccessor = (d) => d.Avg_Instrumentallness;
-      break;
-    case "Average Liveness":
-      xAccessor = (d) => d.Avg_Liveness;
-      break;
-    case "Average Tempo":
-      xAccessor = (d) => d.Avg_Tempo;
-      break;
-  }
-  var xAxisLabel = x_attribute;
+  //changing these vars will change the x and y axis in the scatterplot
+  // Initialize attributes of x and y axis
 
-  var yAccessor;
-  switch (y_attribute) {
-    case "Average Valence":
-      yAccessor = (d) => d.Avg_Valence;
-      break;
-    case "Average Danceability":
-      yAccessor = (d) => d.Avg_Danceability;
-      break;
-    case "Average Energy":
-      yAccessor = (d) => d.Avg_Energy;
-      break;
-    case "Average Key":
-      yAccessor = (d) => d.Avg_Key;
-      break;
-    case "Average Loudness":
-      yAccessor = (d) => d.Avg_Loudness;
-      break;
-    case "Average Mode":
-      yAccessor = (d) => d.Avg_Mode;
-      break;
-    case "Average Speechiness":
-      yAccessor = (d) => d.Avg_Speechiness;
-      break;
-    case "Average Acousticness":
-      yAccessor = (d) => d.Avg_Acousticness;
-      break;
-    case "Average Instrumentallness":
-      yAccessor = (d) => d.Avg_Instrumentallness;
-      break;
-    case "Average Liveness":
-      yAccessor = (d) => d.Avg_Liveness;
-      break;
-    case "Average Tempo":
-      yAccessor = (d) => d.Avg_Tempo;
-      break;
-  }
+  // TODO: Make these defaults show in the dropdown at the start
+  // These were x = Energy and y = Loudness
+  var x_attribute = "Average Valence";
+  var y_attribute = "Average Valence";
+
+  var xAxisLabel = x_attribute;
   var yAxisLabel = y_attribute;
+
+  var xAccessor;
+  var yAccessor;
+
+  // Functions to map an attribute string to a column of data
+  // i.e "Average Valence" -> d.Avg_Valence
+  var set_xAccessor = function(new_x_attribute){
+      switch (new_x_attribute) {
+          case "Average Valence":
+              xAccessor = (d) => d.Avg_Valence;
+              break;
+          case "Average Danceability":
+              xAccessor = (d) => d.Avg_Danceability;
+              break;
+          case "Average Energy":
+              xAccessor = (d) => d.Avg_Energy;
+              break;
+          case "Average Key":
+              xAccessor = (d) => d.Avg_Key;
+              break;
+          case "Average Loudness":
+              xAccessor = (d) => d.Avg_Loudness;
+              break;
+          case "Average Mode":
+              xAccessor = (d) => d.Avg_Mode;
+              break;
+          case "Average Speechiness":
+              xAccessor = (d) => d.Avg_Speechiness;
+              break;
+          case "Average Acousticness":
+              xAccessor = (d) => d.Avg_Acousticness;
+              break;
+          case "Average Instrumentallness":
+              xAccessor = (d) => d.Avg_Instrumentallness;
+              break;
+          case "Average Liveness":
+              xAccessor = (d) => d.Avg_Liveness;
+              break;
+          case "Average Tempo":
+              xAccessor = (d) => d.Avg_Tempo;
+              break;
+      }
+  }
+ 
+  var set_yAccessor = function(new_y_attribute){
+      switch (new_y_attribute) {
+          case "Average Valence":
+              yAccessor = (d) => d.Avg_Valence;
+              break;
+          case "Average Danceability":
+              yAccessor = (d) => d.Avg_Danceability;
+              break;
+          case "Average Energy":
+              yAccessor = (d) => d.Avg_Energy;
+              break;
+          case "Average Key":
+              yAccessor = (d) => d.Avg_Key;
+              break;
+          case "Average Loudness":
+              yAccessor = (d) => d.Avg_Loudness;
+              break;
+          case "Average Mode":
+              yAccessor = (d) => d.Avg_Mode;
+              break;
+          case "Average Speechiness":
+              yAccessor = (d) => d.Avg_Speechiness;
+              break;
+          case "Average Acousticness":
+              yAccessor = (d) => d.Avg_Acousticness;
+              break;
+          case "Average Instrumentallness":
+              yAccessor = (d) => d.Avg_Instrumentallness;
+              break;
+          case "Average Liveness":
+              yAccessor = (d) => d.Avg_Liveness;
+              break;
+          case "Average Tempo":
+              yAccessor = (d) => d.Avg_Tempo;
+              break;
+      }
+  }
+
+  set_xAccessor(x_attribute)
+  set_yAccessor(y_attribute)
 
   var xScale = d3
     .scaleLinear()
@@ -252,4 +274,103 @@ d3.csv("movie_data.csv", function (dataset) {
     .attr("transform", `rotate(-90)`)
     .attr("text-anchor", "middle")
     .text(yAxisLabel);
+
+  /* Create a dropdown button for the x and y axis */
+  var xSelector = d3.select("#xSelector")
+                      .append("select")
+                      .selectAll('attributes')
+                      .data(attributes_full)
+                      .enter()
+                      .append('option')
+                      .text(function (d) {return d;}) // text showed in the menu
+                      .attr("value", function (d) { return d;}) // corresponding value returned by the button
+   
+
+  var ySelector = d3.select("#ySelector")
+                      .append("select")
+                      .selectAll('attributes')
+                      .data(attributes_full)
+                      .enter()
+                      .append('option')
+                      .text(function (d) {return d;}) // text showed in the menu
+                      .attr("value", function (d) { return d;}) // corresponding value returned by the button
+
+  /* Define a callback function for when the axis attribute selections are changed */                        
+  d3.select("#xSelector").on("change", function(){
+
+      var selectedAttribute = d3.select(this)
+                                  .select("select")
+                                  .property("value")
+
+      updateGraph('x', selectedAttribute)
+
+  })
+  
+  d3.select("#ySelector").on("change", function(){
+
+      var selectedAttribute = d3.select(this)
+                                  .select("select")
+                                  .property("value")
+
+      updateGraph('y', selectedAttribute)
+  
+  })
+
+  /* Updates the graph when an axis attribute is changed 
+  axis = 'x' if the x axis is changing, or 'y' if the y axis is changing */
+  var updateGraph = function(axis, selectedAttribute){
+
+      // change x axis
+      if(axis == 'x'){
+
+          xAxisLabel = selectedAttribute
+
+          set_xAccessor(selectedAttribute)  
+
+          xScale
+              .domain(d3.extent(dataset, xAccessor))
+
+          xAxisgen    
+              .scale(xScale)
+
+          xAxis.transition().duration(5000)
+                  .call(xAxisgen)
+
+          // TODO: make the text change look smooth
+          xAxis.transition().duration(1000)
+                  .select(".axis-label")
+                  .text(selectedAttribute)
+
+          dots.transition().duration(5000)
+              .attr("cx", d => xScale(xAccessor(d)))
+          
+      }
+
+      if(axis == 'y'){
+         
+          console.log("changing y")
+          console.log(selectedAttribute)
+          yAxisLabel = selectedAttribute
+
+          set_yAccessor(selectedAttribute)  
+
+          yScale
+              .domain(d3.extent(dataset, yAccessor))
+
+          yAxisgen    
+              .scale(yScale)
+
+          yAxis.transition().duration(5000)
+                  .call(yAxisgen)
+
+          // TODO: make the text change look smooth
+          yAxis.transition().duration(1000)
+                  .select(".axis-label")
+                  .text(selectedAttribute)
+
+          dots.transition().duration(5000)
+              .attr("cy", d => yScale(yAccessor(d)))
+      }
+  }
+
 });
