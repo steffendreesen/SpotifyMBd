@@ -6,6 +6,12 @@ d3.csv("movie_data.csv", function (dataset) {
                           "Average Instrumentallness", "Average Liveness", "Average Tempo"
   ]
 
+  var genres = ["Drama", "Comedy", "Action", "Documentary", "Adventure",
+                "Adult", "Short", "Romance", "Family", "History", "Crime",
+                "Animation", "Mystery", "Biography", "News", "Sci-Fi",
+                "Musical", "Sport", "Fantasy", "Music", "Game-Show",
+                "Reality-TV", "Horror", "Thriller", "Western"]
+
   //converting all values to numbers (d3.csv converts to String, need them to be numeric)
   dataset.forEach((d) => {
     d.Avg_Valence = +d.Avg_Valence;
@@ -21,6 +27,7 @@ d3.csv("movie_data.csv", function (dataset) {
     d.Avg_Tempo = +d.Avg_Tempo;
   });
 
+  // scatterplot dimensions
   var dimensions = {
     margin: {
       top: 30,
@@ -32,6 +39,7 @@ d3.csv("movie_data.csv", function (dataset) {
     height: 700,
   };
 
+  // scatterplot
   var svg = d3
     .select("#scatterplot")
     .attr("width", dimensions.width)
@@ -42,6 +50,7 @@ d3.csv("movie_data.csv", function (dataset) {
       "translate(" + dimensions.margin.left + "," + dimensions.margin.top + ")"
     );
 
+  // tooltip div, position is changed when dots are hovered over
   var div = d3
     .select("body")
     .append("div")
@@ -51,40 +60,11 @@ d3.csv("movie_data.csv", function (dataset) {
   //genres to exclude
   //NOTE: discovered that Horror and Western are both light purple
   var genreExclusionSet = new Set();
-  /*
-  genreExclusionSet.add("Drama");
-  genreExclusionSet.add("Comedy");
-  genreExclusionSet.add("Action");
-  genreExclusionSet.add("Documentary");
-  genreExclusionSet.add("Adventure");
-  genreExclusionSet.add("Adult");
-  genreExclusionSet.add("Short");
-  genreExclusionSet.add("Romance");
-  genreExclusionSet.add("Family");
-  genreExclusionSet.add("History");
-  genreExclusionSet.add("Crime");
-  genreExclusionSet.add("Animation");
-  genreExclusionSet.add("Mystery");
-  genreExclusionSet.add("Biography");
-  genreExclusionSet.add("News");
-  genreExclusionSet.add("Sci-Fi");
-  genreExclusionSet.add("Musical");
-  genreExclusionSet.add("Sport");
-  genreExclusionSet.add("Fantasy");
-  genreExclusionSet.add("Music");
-  genreExclusionSet.add("Game-Show");
-  genreExclusionSet.add("Reality-TV");
-  genreExclusionSet.add("Horror");
-  genreExclusionSet.add("Thriller");
-  genreExclusionSet.add("Western");
-  */
 
   var titleAccessor = (d) => d.Title;
   var genreAccessor = (d) => d.Genre_1;
 
-  //changing these vars will change the x and y axis in the scatterplot
   // Initialize attributes of x and y axis
-
   // TODO: Make these defaults show in the dropdown at the start
   // These were x = Energy and y = Loudness
   var x_attribute = "Average Valence";
@@ -207,14 +187,10 @@ d3.csv("movie_data.csv", function (dataset) {
     .attr("fill", (d) => {
       return myColor(d.Genre_1);
     })
-    .attr("r", (d) => {
-      if (genreExclusionSet.has(genreAccessor(d))) {
-        return 0;
-      } else {
-        return circleRadius;
-      }
-    });
+    // if all the boxes start unchecked, this should be 0
+    .attr("r", circleRadius);
 
+  // hovering functionality for dots
   dots
     .on("mouseover", function (d, i) {
       d3.select(this)
@@ -275,6 +251,31 @@ d3.csv("movie_data.csv", function (dataset) {
     .attr("text-anchor", "middle")
     .text(yAxisLabel);
 
+
+  /* Add a checkbox for each genre in the dataset */
+  var checkbox_div = d3.select("#checkboxes")
+                        .selectAll("genres")
+                        .data(genres)
+                        .enter()
+                        // append a checkbox for each element, and set the id to the corresponding genre
+                        .append('input')
+                          .attr('type', 'checkbox')
+                          .attr('class', 'genre_checkbox')
+                          .attr('id', function (d) {return d;})
+                          .property('checked', true)
+
+
+  /* use the HTML 'label' element to add the genre name to the box */
+  var checkbox_labels_div = d3.select("#checkbox_labels")
+                        .selectAll("genre_labels")
+                        .data(genres)
+                        .enter() 
+                        .append('label')
+                          // value of 'for' attribute links the label to a checkbox with the same id
+                          .attr('for', function (d) {return d;})
+                          .attr('class', 'genre_checkbox_label')
+                          .text(function (d) {return d;})
+
   /* Create a dropdown button for the x and y axis */
   var xSelector = d3.select("#xSelector")
                       .append("select")
@@ -314,6 +315,38 @@ d3.csv("movie_data.csv", function (dataset) {
 
       updateGraph('y', selectedAttribute)
   
+  })
+
+  d3.selectAll(".genre_checkbox").on('change', function(){
+
+      genre = d3.select(this).attr('id')
+
+      // A bug might w/ removing non-existing value might occur in the future
+      // I am assuming that the exclusion set is empty at the start, and all boxes are checked
+
+      // box was just unchecked
+      if(!d3.select(this).property("checked")){
+
+        genreExclusionSet.add(genre)
+
+      }
+
+      // box was just checked
+      else{
+        genreExclusionSet.delete(genre)
+      }
+
+      // update points
+      // this could be more efficent but I wasn't sure how to check the genre of a dot differently
+      dots.transition().duration(500)
+        .attr("r", (d) => {
+          if (genreExclusionSet.has(genreAccessor(d))) {
+            return 0;
+          } else {
+            return circleRadius;
+          }
+        })
+      
   })
 
   /* Updates the graph when an axis attribute is changed 

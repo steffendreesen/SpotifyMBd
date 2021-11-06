@@ -52,13 +52,34 @@
       background-color: #3e8e41;
       }
 
+      /* for the checkboxes and labels */
+
+      .genre_checkbox {
+        width: 68px;
+      }
+
+      .checkbox_labels{
+        display: table;
+        width: 100%;
+      }
+
+      .genre_checkbox_label {
+        display: table-cell;
+        text-align: center;
+      }
+
       /* body{
                 background-color: blanchedalmond;
             } */
     </style>
     <h1>Scatterplot with interactive axis attributes (not interactive yet)</h1>
 
+    <div id="checkboxes" class="checkboxes">
+      <div id="checkbox_labels" class="checkbox_labels"></div>
+    </div>
+
     <svg id="scatterplot"></svg>
+    <div>Temp Gap For Selectors</div>
     <button id="xSelector"></button>
     <button id="ySelector"></button>
     <h1>Interactive Film Genre Soundtrack Attribute Analyzer</h1>
