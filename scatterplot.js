@@ -1,16 +1,45 @@
 d3.csv("movie_data.csv", function (dataset) {
+  var attributes_full = [
+    "Average Valence",
+    "Average Danceability",
+    "Average Energy",
+    "Average Key",
+    "Average Loudness",
+    "Average Mode",
+    "Average Speechiness",
+    "Average Acousticness",
+    "Average Instrumentallness",
+    "Average Liveness",
+    "Average Tempo",
+  ];
 
-  var attributes_full = ["Average Valence", "Average Danceability", "Average Energy",
-                          "Average Key", "Average Loudness", "Average Mode", 
-                          "Average Speechiness", "Average Acousticness",
-                          "Average Instrumentallness", "Average Liveness", "Average Tempo"
-  ]
-
-  var genres = ["Drama", "Comedy", "Action", "Documentary", "Adventure",
-                "Adult", "Short", "Romance", "Family", "History", "Crime",
-                "Animation", "Mystery", "Biography", "News", "Sci-Fi",
-                "Musical", "Sport", "Fantasy", "Music", "Game-Show",
-                "Reality-TV", "Horror", "Thriller", "Western"]
+  var genres = [
+    "Drama",
+    "Comedy",
+    "Action",
+    "Documentary",
+    "Adventure",
+    "Adult",
+    "Short",
+    "Romance",
+    "Family",
+    "History",
+    "Crime",
+    "Animation",
+    "Mystery",
+    "Biography",
+    "News",
+    "Sci-Fi",
+    "Musical",
+    "Sport",
+    "Fantasy",
+    "Music",
+    "Game-Show",
+    "Reality-TV",
+    "Horror",
+    "Thriller",
+    "Western",
+  ];
 
   //converting all values to numbers (d3.csv converts to String, need them to be numeric)
   dataset.forEach((d) => {
@@ -78,84 +107,84 @@ d3.csv("movie_data.csv", function (dataset) {
 
   // Functions to map an attribute string to a column of data
   // i.e "Average Valence" -> d.Avg_Valence
-  var set_xAccessor = function(new_x_attribute){
-      switch (new_x_attribute) {
-          case "Average Valence":
-              xAccessor = (d) => d.Avg_Valence;
-              break;
-          case "Average Danceability":
-              xAccessor = (d) => d.Avg_Danceability;
-              break;
-          case "Average Energy":
-              xAccessor = (d) => d.Avg_Energy;
-              break;
-          case "Average Key":
-              xAccessor = (d) => d.Avg_Key;
-              break;
-          case "Average Loudness":
-              xAccessor = (d) => d.Avg_Loudness;
-              break;
-          case "Average Mode":
-              xAccessor = (d) => d.Avg_Mode;
-              break;
-          case "Average Speechiness":
-              xAccessor = (d) => d.Avg_Speechiness;
-              break;
-          case "Average Acousticness":
-              xAccessor = (d) => d.Avg_Acousticness;
-              break;
-          case "Average Instrumentallness":
-              xAccessor = (d) => d.Avg_Instrumentallness;
-              break;
-          case "Average Liveness":
-              xAccessor = (d) => d.Avg_Liveness;
-              break;
-          case "Average Tempo":
-              xAccessor = (d) => d.Avg_Tempo;
-              break;
-      }
-  }
- 
-  var set_yAccessor = function(new_y_attribute){
-      switch (new_y_attribute) {
-          case "Average Valence":
-              yAccessor = (d) => d.Avg_Valence;
-              break;
-          case "Average Danceability":
-              yAccessor = (d) => d.Avg_Danceability;
-              break;
-          case "Average Energy":
-              yAccessor = (d) => d.Avg_Energy;
-              break;
-          case "Average Key":
-              yAccessor = (d) => d.Avg_Key;
-              break;
-          case "Average Loudness":
-              yAccessor = (d) => d.Avg_Loudness;
-              break;
-          case "Average Mode":
-              yAccessor = (d) => d.Avg_Mode;
-              break;
-          case "Average Speechiness":
-              yAccessor = (d) => d.Avg_Speechiness;
-              break;
-          case "Average Acousticness":
-              yAccessor = (d) => d.Avg_Acousticness;
-              break;
-          case "Average Instrumentallness":
-              yAccessor = (d) => d.Avg_Instrumentallness;
-              break;
-          case "Average Liveness":
-              yAccessor = (d) => d.Avg_Liveness;
-              break;
-          case "Average Tempo":
-              yAccessor = (d) => d.Avg_Tempo;
-              break;
-      }
-  }
+  var set_xAccessor = function (new_x_attribute) {
+    switch (new_x_attribute) {
+      case "Average Valence":
+        xAccessor = (d) => d.Avg_Valence;
+        break;
+      case "Average Danceability":
+        xAccessor = (d) => d.Avg_Danceability;
+        break;
+      case "Average Energy":
+        xAccessor = (d) => d.Avg_Energy;
+        break;
+      case "Average Key":
+        xAccessor = (d) => d.Avg_Key;
+        break;
+      case "Average Loudness":
+        xAccessor = (d) => d.Avg_Loudness;
+        break;
+      case "Average Mode":
+        xAccessor = (d) => d.Avg_Mode;
+        break;
+      case "Average Speechiness":
+        xAccessor = (d) => d.Avg_Speechiness;
+        break;
+      case "Average Acousticness":
+        xAccessor = (d) => d.Avg_Acousticness;
+        break;
+      case "Average Instrumentallness":
+        xAccessor = (d) => d.Avg_Instrumentallness;
+        break;
+      case "Average Liveness":
+        xAccessor = (d) => d.Avg_Liveness;
+        break;
+      case "Average Tempo":
+        xAccessor = (d) => d.Avg_Tempo;
+        break;
+    }
+  };
 
-  set_xAccessor(x_attribute)
-  set_yAccessor(y_attribute)
+  var set_yAccessor = function (new_y_attribute) {
+    switch (new_y_attribute) {
+      case "Average Valence":
+        yAccessor = (d) => d.Avg_Valence;
+        break;
+      case "Average Danceability":
+        yAccessor = (d) => d.Avg_Danceability;
+        break;
+      case "Average Energy":
+        yAccessor = (d) => d.Avg_Energy;
+        break;
+      case "Average Key":
+        yAccessor = (d) => d.Avg_Key;
+        break;
+      case "Average Loudness":
+        yAccessor = (d) => d.Avg_Loudness;
+        break;
+      case "Average Mode":
+        yAccessor = (d) => d.Avg_Mode;
+        break;
+      case "Average Speechiness":
+        yAccessor = (d) => d.Avg_Speechiness;
+        break;
+      case "Average Acousticness":
+        yAccessor = (d) => d.Avg_Acousticness;
+        break;
+      case "Average Instrumentallness":
+        yAccessor = (d) => d.Avg_Instrumentallness;
+        break;
+      case "Average Liveness":
+        yAccessor = (d) => d.Avg_Liveness;
+        break;
+      case "Average Tempo":
+        yAccessor = (d) => d.Avg_Tempo;
+        break;
+    }
+  };
+
+  set_xAccessor(x_attribute);
+  set_yAccessor(y_attribute);
 
   var xScale = d3
     .scaleLinear()
@@ -176,12 +205,14 @@ d3.csv("movie_data.csv", function (dataset) {
   var myColor = d3.scaleOrdinal().domain(dataset).range(d3.schemePaired);
 
   var circleRadius = 2.5;
+  var minTracks = 2;
 
   var dots = svg
     .selectAll("circle")
     .data(dataset)
     .enter()
     .append("circle")
+    .filter((d) => d.Num_Tracks >= minTracks)
     .attr("cx", (d) => xScale(xAccessor(d)))
     .attr("cy", (d) => yScale(yAccessor(d)))
     .attr("fill", (d) => {
@@ -251,159 +282,161 @@ d3.csv("movie_data.csv", function (dataset) {
     .attr("text-anchor", "middle")
     .text(yAxisLabel);
 
-
   /* Add a checkbox for each genre in the dataset */
-  var checkbox_div = d3.select("#checkboxes")
-                        .selectAll("genres")
-                        .data(genres)
-                        .enter()
-                        // append a checkbox for each element, and set the id to the corresponding genre
-                        .append('input')
-                          .attr('type', 'checkbox')
-                          .attr('class', 'genre_checkbox')
-                          .attr('id', function (d) {return d;})
-                          .property('checked', true)
-
+  var checkbox_div = d3
+    .select("#checkboxes")
+    .selectAll("genres")
+    .data(genres)
+    .enter()
+    // append a checkbox for each element, and set the id to the corresponding genre
+    .append("input")
+    .attr("type", "checkbox")
+    .attr("class", "genre_checkbox")
+    .attr("id", function (d) {
+      return d;
+    })
+    .property("checked", true);
 
   /* use the HTML 'label' element to add the genre name to the box */
-  var checkbox_labels_div = d3.select("#checkbox_labels")
-                        .selectAll("genre_labels")
-                        .data(genres)
-                        .enter() 
-                        .append('label')
-                          // value of 'for' attribute links the label to a checkbox with the same id
-                          .attr('for', function (d) {return d;})
-                          .attr('class', 'genre_checkbox_label')
-                          .text(function (d) {return d;})
+  var checkbox_labels_div = d3
+    .select("#checkbox_labels")
+    .selectAll("genre_labels")
+    .data(genres)
+    .enter()
+    .append("label")
+    // value of 'for' attribute links the label to a checkbox with the same id
+    .attr("for", function (d) {
+      return d;
+    })
+    .attr("class", "genre_checkbox_label")
+    .text(function (d) {
+      return d;
+    });
 
   /* Create a dropdown button for the x and y axis */
-  var xSelector = d3.select("#xSelector")
-                      .append("select")
-                      .selectAll('attributes')
-                      .data(attributes_full)
-                      .enter()
-                      .append('option')
-                      .text(function (d) {return d;}) // text showed in the menu
-                      .attr("value", function (d) { return d;}) // corresponding value returned by the button
-   
+  var xSelector = d3
+    .select("#xSelector")
+    .append("select")
+    .selectAll("attributes")
+    .data(attributes_full)
+    .enter()
+    .append("option")
+    .text(function (d) {
+      return d;
+    }) // text showed in the menu
+    .attr("value", function (d) {
+      return d;
+    }); // corresponding value returned by the button
 
-  var ySelector = d3.select("#ySelector")
-                      .append("select")
-                      .selectAll('attributes')
-                      .data(attributes_full)
-                      .enter()
-                      .append('option')
-                      .text(function (d) {return d;}) // text showed in the menu
-                      .attr("value", function (d) { return d;}) // corresponding value returned by the button
+  var ySelector = d3
+    .select("#ySelector")
+    .append("select")
+    .selectAll("attributes")
+    .data(attributes_full)
+    .enter()
+    .append("option")
+    .text(function (d) {
+      return d;
+    }) // text showed in the menu
+    .attr("value", function (d) {
+      return d;
+    }); // corresponding value returned by the button
 
-  /* Define a callback function for when the axis attribute selections are changed */                        
-  d3.select("#xSelector").on("change", function(){
+  /* Define a callback function for when the axis attribute selections are changed */
+  d3.select("#xSelector").on("change", function () {
+    var selectedAttribute = d3.select(this).select("select").property("value");
 
-      var selectedAttribute = d3.select(this)
-                                  .select("select")
-                                  .property("value")
+    updateGraph("x", selectedAttribute);
+  });
 
-      updateGraph('x', selectedAttribute)
+  d3.select("#ySelector").on("change", function () {
+    var selectedAttribute = d3.select(this).select("select").property("value");
 
-  })
-  
-  d3.select("#ySelector").on("change", function(){
+    updateGraph("y", selectedAttribute);
+  });
 
-      var selectedAttribute = d3.select(this)
-                                  .select("select")
-                                  .property("value")
+  d3.selectAll(".genre_checkbox").on("change", function () {
+    genre = d3.select(this).attr("id");
 
-      updateGraph('y', selectedAttribute)
-  
-  })
+    // A bug might w/ removing non-existing value might occur in the future
+    // I am assuming that the exclusion set is empty at the start, and all boxes are checked
 
-  d3.selectAll(".genre_checkbox").on('change', function(){
+    // box was just unchecked
+    if (!d3.select(this).property("checked")) {
+      genreExclusionSet.add(genre);
+    }
 
-      genre = d3.select(this).attr('id')
+    // box was just checked
+    else {
+      genreExclusionSet.delete(genre);
+    }
 
-      // A bug might w/ removing non-existing value might occur in the future
-      // I am assuming that the exclusion set is empty at the start, and all boxes are checked
-
-      // box was just unchecked
-      if(!d3.select(this).property("checked")){
-
-        genreExclusionSet.add(genre)
-
-      }
-
-      // box was just checked
-      else{
-        genreExclusionSet.delete(genre)
-      }
-
-      // update points
-      // this could be more efficent but I wasn't sure how to check the genre of a dot differently
-      dots.transition().duration(500)
-        .attr("r", (d) => {
-          if (genreExclusionSet.has(genreAccessor(d))) {
-            return 0;
-          } else {
-            return circleRadius;
-          }
-        })
-      
-  })
+    // update points
+    // this could be more efficent but I wasn't sure how to check the genre of a dot differently
+    dots
+      .transition()
+      .duration(500)
+      .attr("r", (d) => {
+        if (genreExclusionSet.has(genreAccessor(d))) {
+          return 0;
+        } else {
+          return circleRadius;
+        }
+      });
+  });
 
   /* Updates the graph when an axis attribute is changed 
   axis = 'x' if the x axis is changing, or 'y' if the y axis is changing */
-  var updateGraph = function(axis, selectedAttribute){
+  var updateGraph = function (axis, selectedAttribute) {
+    // change x axis
+    if (axis == "x") {
+      xAxisLabel = selectedAttribute;
 
-      // change x axis
-      if(axis == 'x'){
+      set_xAccessor(selectedAttribute);
 
-          xAxisLabel = selectedAttribute
+      xScale.domain(d3.extent(dataset, xAccessor));
 
-          set_xAccessor(selectedAttribute)  
+      xAxisgen.scale(xScale);
 
-          xScale
-              .domain(d3.extent(dataset, xAccessor))
+      xAxis.transition().duration(5000).call(xAxisgen);
 
-          xAxisgen    
-              .scale(xScale)
+      // TODO: make the text change look smooth
+      xAxis
+        .transition()
+        .duration(1000)
+        .select(".axis-label")
+        .text(selectedAttribute);
 
-          xAxis.transition().duration(5000)
-                  .call(xAxisgen)
+      dots
+        .transition()
+        .duration(5000)
+        .attr("cx", (d) => xScale(xAccessor(d)));
+    }
 
-          // TODO: make the text change look smooth
-          xAxis.transition().duration(1000)
-                  .select(".axis-label")
-                  .text(selectedAttribute)
+    if (axis == "y") {
+      console.log("changing y");
+      console.log(selectedAttribute);
+      yAxisLabel = selectedAttribute;
 
-          dots.transition().duration(5000)
-              .attr("cx", d => xScale(xAccessor(d)))
-          
-      }
+      set_yAccessor(selectedAttribute);
 
-      if(axis == 'y'){
-         
-          console.log("changing y")
-          console.log(selectedAttribute)
-          yAxisLabel = selectedAttribute
+      yScale.domain(d3.extent(dataset, yAccessor));
 
-          set_yAccessor(selectedAttribute)  
+      yAxisgen.scale(yScale);
 
-          yScale
-              .domain(d3.extent(dataset, yAccessor))
+      yAxis.transition().duration(5000).call(yAxisgen);
 
-          yAxisgen    
-              .scale(yScale)
+      // TODO: make the text change look smooth
+      yAxis
+        .transition()
+        .duration(1000)
+        .select(".axis-label")
+        .text(selectedAttribute);
 
-          yAxis.transition().duration(5000)
-                  .call(yAxisgen)
-
-          // TODO: make the text change look smooth
-          yAxis.transition().duration(1000)
-                  .select(".axis-label")
-                  .text(selectedAttribute)
-
-          dots.transition().duration(5000)
-              .attr("cy", d => yScale(yAccessor(d)))
-      }
-  }
-
+      dots
+        .transition()
+        .duration(5000)
+        .attr("cy", (d) => yScale(yAccessor(d)));
+    }
+  };
 });
