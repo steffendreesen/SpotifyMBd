@@ -414,8 +414,6 @@ d3.csv("movie_data.csv", function (dataset) {
     }
 
     if (axis == "y") {
-      console.log("changing y");
-      console.log(selectedAttribute);
       yAxisLabel = selectedAttribute;
 
       set_yAccessor(selectedAttribute);
