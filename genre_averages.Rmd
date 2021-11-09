@@ -13,6 +13,7 @@ num_movies <- 4870
 
 # load the csv data into a dataframe
 data <- read.csv("Main_3_no_songs.csv")
+data <- data[, 1:16]
 
 # extract attribute names
 # 'Avg_valence', 'Avg_Danceability', ... , 'Avg_Tempo'
@@ -28,6 +29,7 @@ all_movie_genres <- unlist(data[, 2:4])
 # list all genres in the dataset
 # [-26] Keeps all values except the 26th, which is 'N/A' 
 genres <- unique(all_movie_genres)[-26]
+num_genres <- length(genres)
 
 ```
 
@@ -43,7 +45,7 @@ averages <- cbind(attributes, averages)
 
 ```
 
-```{r compute attributes}
+```{r compute averages}
 
 for(genre in genres){
   
@@ -74,6 +76,37 @@ averages <- averages[-28]
 
 ```
 
+```{r postprocessing}
+
+averages <- t(averages)
+colnames(averages) <- attributes
+averages <- averages[-1, ]
+
+```
+
 ```{r save averages}
 write.csv(averages, "Genre_average_attributes.csv")
+```
+
+```{r distance matrix}
+
+distances <- data.frame(matrix(data=NA, nrow=num_genres, ncol=num_genres))
+
+for(i in 1:num_genres){
+
+  for(j in 1:num_genres){
+    
+    a <- as.double(averages[i, ])
+    b <- as.double(averages[j, ])
+    distances[i, j] <- sum((a - b)^2)
+    
+  }
+  
+}
+
+rownames(distances) <- genres
+colnames(distances) <- genres
+
+write.csv(distances, "Genre_distances.csv")
+
 ```
