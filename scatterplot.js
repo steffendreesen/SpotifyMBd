@@ -39,6 +39,7 @@ d3.csv("movie_data.csv", function (dataset) {
     "Horror",
     "Thriller",
     "Western",
+    "War"
   ];
 
   //converting all values to numbers (d3.csv converts to String, need them to be numeric)
