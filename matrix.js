@@ -79,7 +79,7 @@ d3.csv("Genre_distances.csv", function (dataset) {
 
    var myColor = d3.scaleLinear()
                     .domain([0, 100])
-                    .range(["green", "#4713a8"]);
+                    .range(["white", "#4713a8"]);
 
 
     /*
@@ -116,6 +116,8 @@ d3.csv("Genre_distances.csv", function (dataset) {
                 .attr("y", yScale(other_genre))
                 .attr("width", xScale.bandwidth() - 4)
                 .attr("height", yScale.bandwidth() - 4)
+                .attr("stroke", "black")
+                .attr("stroke-width", 4)
                 .style("fill", myColor(distance))
 
         }
