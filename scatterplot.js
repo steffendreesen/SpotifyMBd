@@ -283,24 +283,31 @@ d3.csv("movie_data.csv", function (dataset) {
     .attr("text-anchor", "middle")
     .text(yAxisLabel);
 
+  
+  var genreColor = d3.scaleOrdinal().domain(genres).range(d3.schemePaired);
   /* Add a checkbox for each genre in the dataset */
-  var checkbox_div = d3
-    .select("#checkboxes")
+  var filter_buttons_div = d3
+    .select("#filter_buttons")
     .selectAll("genres")
     .data(genres)
     .enter()
     // append a checkbox for each element, and set the id to the corresponding genre
     .append("input")
-    .attr("type", "checkbox")
-    .attr("class", "genre_checkbox")
+    .attr("type", "button")
+    // .attr("class", "genre_checkbox")
+    .attr("class", "genre_filter_button")
+    // .attr("fill", (d) => {
+    //   return genreColor(d.Drama);
+    // })
+    .attr("fill", "blue")
     .attr("id", function (d) {
       return d;
     })
     .property("checked", true);
 
   /* use the HTML 'label' element to add the genre name to the box */
-  var checkbox_labels_div = d3
-    .select("#checkbox_labels")
+  var filter_buttons_labels_div = d3
+    .select("#filter_buttons_labels")
     .selectAll("genre_labels")
     .data(genres)
     .enter()
@@ -309,7 +316,8 @@ d3.csv("movie_data.csv", function (dataset) {
     .attr("for", function (d) {
       return d;
     })
-    .attr("class", "genre_checkbox_label")
+    // .attr("class", "genre_checkbox_label")
+    .attr("class", "genre_filter_button")
     .text(function (d) {
       return d;
     });
@@ -356,14 +364,15 @@ d3.csv("movie_data.csv", function (dataset) {
     updateGraph("y", selectedAttribute);
   });
 
-  d3.selectAll(".genre_checkbox").on("change", function () {
+  d3.selectAll(".genre_filter_button").on("click", function () {
+    console.log("clicked");
     genre = d3.select(this).attr("id");
 
     // A bug might w/ removing non-existing value might occur in the future
     // I am assuming that the exclusion set is empty at the start, and all boxes are checked
 
     // box was just unchecked
-    if (!d3.select(this).property("checked")) {
+    if (!d3.select(this).property("clicked")) {
       genreExclusionSet.add(genre);
     }
 
@@ -439,3 +448,4 @@ d3.csv("movie_data.csv", function (dataset) {
     }
   };
 });
+
