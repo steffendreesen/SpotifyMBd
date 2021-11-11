@@ -1,4 +1,4 @@
-d3.csv("Genre_distances.csv", function (dataset) {
+d3.csv("Genre_distances_no_tempo.csv", function (dataset) {
 
     var genres = [
         "Drama",
@@ -78,7 +78,7 @@ d3.csv("Genre_distances.csv", function (dataset) {
                  
 
    var myColor = d3.scaleLinear()
-                    .domain([0, 100])
+                    .domain([0, 20])
                     .range(["white", "#4713a8"]);
 
 
@@ -117,7 +117,7 @@ d3.csv("Genre_distances.csv", function (dataset) {
                 .attr("width", xScale.bandwidth() - 4)
                 .attr("height", yScale.bandwidth() - 4)
                 .attr("stroke", "black")
-                .attr("stroke-width", 4)
+                .attr("stroke-width", 2)
                 .style("fill", myColor(distance))
 
         }

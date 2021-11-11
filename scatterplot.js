@@ -203,6 +203,7 @@ d3.csv("movie_data.csv", function (dataset) {
       dimensions.margin.top,
     ]);
 
+  console.log(dataset)
   var myColor = d3.scaleOrdinal().domain(dataset).range(d3.schemePaired);
 
   var circleRadius = 2.5;
@@ -283,44 +284,29 @@ d3.csv("movie_data.csv", function (dataset) {
     .attr("text-anchor", "middle")
     .text(yAxisLabel);
 
-  
-  var genreColor = d3.scaleOrdinal().domain(genres).range(d3.schemePaired);
-  /* Add a checkbox for each genre in the dataset */
+  /* Add a button for each genre in the dataset */
   var filter_buttons_div = d3
     .select("#filter_buttons")
     .selectAll("genres")
     .data(genres)
     .enter()
-    // append a checkbox for each element, and set the id to the corresponding genre
+    // append a button for each element, and set the id to the corresponding genre
     .append("input")
     .attr("type", "button")
-    // .attr("class", "genre_checkbox")
-    .attr("class", "genre_filter_button")
-    // .attr("fill", (d) => {
-    //   return genreColor(d.Drama);
-    // })
-    .attr("fill", "blue")
+    .style("background-color", function (d) {
+      return myColor(d);
+    })
+
     .attr("id", function (d) {
       return d;
     })
-    .property("checked", true);
 
-  /* use the HTML 'label' element to add the genre name to the box */
-  var filter_buttons_labels_div = d3
-    .select("#filter_buttons_labels")
-    .selectAll("genre_labels")
-    .data(genres)
-    .enter()
-    .append("label")
-    // value of 'for' attribute links the label to a checkbox with the same id
-    .attr("for", function (d) {
+    .attr("value", function (d) {
       return d;
     })
-    // .attr("class", "genre_checkbox_label")
-    .attr("class", "genre_filter_button")
-    .text(function (d) {
-      return d;
-    });
+
+    // initialize all buttons as turned on
+    .classed("activatedGenre", true)
 
   /* Create a dropdown button for the x and y axis */
   var xSelector = d3
@@ -364,21 +350,36 @@ d3.csv("movie_data.csv", function (dataset) {
     updateGraph("y", selectedAttribute);
   });
 
-  d3.selectAll(".genre_filter_button").on("click", function () {
-    console.log("clicked");
-    genre = d3.select(this).attr("id");
+  d3.select(".filter_buttons").selectAll("input").on("click", function () {
+    var button = d3.select(this);
+    var genre = button.attr("id");
+    var current_status = button.attr("class");
 
     // A bug might w/ removing non-existing value might occur in the future
     // I am assuming that the exclusion set is empty at the start, and all boxes are checked
 
-    // box was just unchecked
-    if (!d3.select(this).property("clicked")) {
-      genreExclusionSet.add(genre);
-    }
+    // turing button off
+    if(current_status == "activatedGenre"){
+   
+      button.classed("activatedGenre", false)
+      button.classed("deactivatedGenre", true)
 
-    // box was just checked
-    else {
-      genreExclusionSet.delete(genre);
+      genreExclusionSet.add(genre)
+
+      // TODO: Use CSS to create default styles for activated and deactivated.
+      // The size, margins, display, etc will overlap, but the background color and text color should be different
+      button.style("background-color", "gray")
+   
+    // turing button on
+    } else if(current_status == "deactivatedGenre"){
+
+      button.classed("deactivatedGenre", false)
+      button.classed("activatedGenre", true)
+  
+      genreExclusionSet.delete(genre)
+
+      button.style("background-color", myColor(genre))
+
     }
 
     // update points

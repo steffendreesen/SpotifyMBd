@@ -89,6 +89,8 @@ write.csv(averages, "Genre_average_attributes.csv")
 ```
 
 ```{r distance matrix}
+# remove tempo
+averages <- averages[, -11]
 
 distances <- data.frame(matrix(data=NA, nrow=num_genres, ncol=num_genres))
 
@@ -107,6 +109,6 @@ for(i in 1:num_genres){
 rownames(distances) <- genres
 colnames(distances) <- genres
 
-write.csv(distances, "Genre_distances.csv")
+write.csv(distances, "Genre_distances_no_tempo.csv")
 
 ```
