@@ -203,8 +203,95 @@ d3.csv("movie_data.csv", function (dataset) {
       dimensions.margin.top,
     ]);
 
-  //console.log(dataset)
-  var myColor = d3.scaleOrdinal().domain(dataset).range(d3.schemePaired);
+  var myColor = (genre) => {
+    switch (genre) {
+      case "Drama":
+        return "#d148a4";
+        break;
+      case "Comedy":
+        return "#6dd3c7";
+        break;
+      case "Action":
+        return "#5d3ac1";
+        break;
+      case "Documentary":
+        return "#cbd465";
+        break;
+      case "Adventure":
+        return "#be4dd5";
+        break;
+      case "Adult":
+        return "#68d98d";
+        break;
+      case "Short":
+        return "#482871";
+        break;
+      case "Romance":
+        return "#db4885";
+        break;
+      case "Family":
+        return "#7674d5";
+        break;
+      case "History":
+        return "#d6a240";
+        break;
+      case "Crime":
+        return "#5d78aa";
+        break;
+      case "Animation":
+        return "#dc4528";
+        break;
+      case "Mystery":
+        return "#78d747";
+        break;
+      case "Biography":
+        return "#cf4560";
+        break;
+      case "News":
+        return "#54883e";
+        break;
+      case "Sci-Fi":
+        return "#cf95ce";
+        break;
+      case "Musical":
+        return "#344326";
+        break;
+      case "Sport":
+        return "#98bada";
+        break;
+      case "Fantasy":
+        return "#c06738";
+        break;
+      case "Music":
+        return "#392e44";
+        break;
+      case "Game-Show":
+        return "#98322e";
+        break;
+      case "Talk-Show":
+        return "#3b5b6e";
+        break;
+      case "Reality-TV":
+        return "#8c406e";
+        break;
+      case "Horror":
+        return "#8a773d";
+        break;
+      case "Thriller":
+        return "#57827a";
+        break;
+      case "Western":
+        return "#6a322a";
+        break;
+      case "War":
+        return "#cc8f8d";
+        break;
+    }
+    /*
+     In case we need more: 
+        #896d74
+    */
+  };
 
   var circleRadius = 2.5;
   var minTracks = 2;
