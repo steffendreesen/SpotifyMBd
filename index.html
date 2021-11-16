@@ -5,13 +5,13 @@
     <title>Group 5 Project</title>
     <script src="https://d3js.org/d3.v4.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" type="text/css" href="styles.css" />
   </head>
   <body>
-   
-    <h1>Scatterplot with interactive axis attributes (not interactive yet)</h1>
+    <h1>Scatterplot with interactive axis attributes</h1>
 
-    <div id="filter_buttons" class="filter_buttons"> </div>
+    <div id="filter_buttons" class="filter_buttons"></div>
     <svg id="scatterplot"></svg>
     <div>Temp Gap For Selectors</div>
     <button id="xSelector"></button>
@@ -20,16 +20,13 @@
     <h1>Genre Similarity Matrix</h1>
     <svg id="matrix"></svg>
 
-    <h1>Song to Film Genre Fitness Chart</h1>
-    <svg
-      version="1.1"
-      width="300"
-      height="200"
-      xmlns="http://www.w3.org/2000/svg"
-    ></svg>
+    <h1>Radar</h1>
+    <div class="radar-container">
+      <canvas id="radar"></canvas>
+    </div>
   </body>
-  
+
   <script src="scatterplot.js"></script>
   <script src="matrix.js"></script>
-
+  <script src="radar.js"></script>
 </html>
