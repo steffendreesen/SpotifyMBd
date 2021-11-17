@@ -306,6 +306,7 @@ d3.csv("movie_data.csv", function (dataset) {
     .attr("cy", (d) => yScale(yAccessor(d)))
     .attr("fill", (d) => {
       return myColor(d.Genre_1);
+        console.log(id)
     })
     // if all the boxes start unchecked, this should be 0
     .attr("r", circleRadius);
