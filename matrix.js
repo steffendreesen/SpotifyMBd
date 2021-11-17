@@ -119,5 +119,5 @@ d3.csv("Genre_distances_no_tempo.csv", function (dataset) {
 
         }
     }
-  }
+
 });
