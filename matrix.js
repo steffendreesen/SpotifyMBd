@@ -104,30 +104,58 @@ d3.csv("Genre_distances_no_tempo.csv", function (dataset) {
             .attr("stroke-width", 1)
     }
 
+    // first button clicked
+    var first = true
+
     var clicked = function() {
-        var button = d3.select(this)
-        var id = button.attr("id")
-        
-        var genre1 = id.split("_")[0]
-        var genre2 = id.split("_")[1]
-        var genre1_row = id.split("_")[2]
+        // current button
+        var button = d3.select(this)      
+        // previous button (could be the same as above)
+        // there should only be 1 button with class selectedButton at a time
+        var old_button = d3.select(".selectedButton")
+        console.log(old_button)
 
-        var status = button.attr("class")
-        var distance = dataset[genre1_row][genre2]
-
-
-        if(status == "unselectedButton"){
+        // handle the first button clicked
+        if(first){
+            first = false
 
             button.classed("unselectedButton", false)
             button.classed("selectedButton", true)
             button.style("fill", "gold")
+            return
+        }
 
-        } else if(status == "selectedButton"){
 
-            button.classed("selectedButton", false)
-            button.classed("unselectedButton", true)
-            button.style("fill", myColor(distance))
+        // trying to compare Objects, idk how to do it in javascript
+        // maybe === is right
+        if(!(button === old_button)){
 
+            // get the distance stored in the current button clicked
+            var id = button.attr("id")
+            
+            var genre1 = id.split("_")[0]
+            var genre2 = id.split("_")[1]
+            var genre1_row = id.split("_")[2]
+
+            var distance = dataset[genre1_row][genre2]
+
+            // distance in the previous button clicked
+            var old_id = old_button.attr("id")
+
+            var old_genre1 = old_id.split("_")[0]
+            var old_genre2 = old_id.split("_")[1]
+            var old_genre1_row = old_id.split("_")[2]
+
+            var old_distance = dataset[old_genre1_row][old_genre2]
+
+            // update the old and new buttons
+            old_button.classed("selectedButton", false)
+            old_button.classed("unselectedButton", true)
+            old_button.style("fill", myColor(old_distance))
+
+            button.classed("unselectedButton", false)
+            button.classed("selectedButton", true)
+            button.style("fill", "gold")
         }
     }
 
