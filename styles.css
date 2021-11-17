@@ -16,3 +16,8 @@ h1 {
 h2 {
   text-align: left;
 }
+
+.radar-container {
+  width: 700px !important;
+  height: 700px !important;
+}

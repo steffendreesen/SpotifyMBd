@@ -39,7 +39,7 @@ d3.csv("movie_data.csv", function (dataset) {
     "Horror",
     "Thriller",
     "Western",
-    "War"
+    "War",
   ];
 
   //converting all values to numbers (d3.csv converts to String, need them to be numeric)
@@ -203,7 +203,95 @@ d3.csv("movie_data.csv", function (dataset) {
       dimensions.margin.top,
     ]);
 
-  var myColor = d3.scaleOrdinal().domain(dataset).range(d3.schemePaired);
+  var myColor = (genre) => {
+    switch (genre) {
+      case "Drama":
+        return "#d148a4";
+        break;
+      case "Comedy":
+        return "#6dd3c7";
+        break;
+      case "Action":
+        return "#5d3ac1";
+        break;
+      case "Documentary":
+        return "#cbd465";
+        break;
+      case "Adventure":
+        return "#be4dd5";
+        break;
+      case "Adult":
+        return "#68d98d";
+        break;
+      case "Short":
+        return "#482871";
+        break;
+      case "Romance":
+        return "#db4885";
+        break;
+      case "Family":
+        return "#7674d5";
+        break;
+      case "History":
+        return "#d6a240";
+        break;
+      case "Crime":
+        return "#5d78aa";
+        break;
+      case "Animation":
+        return "#dc4528";
+        break;
+      case "Mystery":
+        return "#78d747";
+        break;
+      case "Biography":
+        return "#cf4560";
+        break;
+      case "News":
+        return "#54883e";
+        break;
+      case "Sci-Fi":
+        return "#cf95ce";
+        break;
+      case "Musical":
+        return "#344326";
+        break;
+      case "Sport":
+        return "#98bada";
+        break;
+      case "Fantasy":
+        return "#c06738";
+        break;
+      case "Music":
+        return "#392e44";
+        break;
+      case "Game-Show":
+        return "#98322e";
+        break;
+      case "Talk-Show":
+        return "#3b5b6e";
+        break;
+      case "Reality-TV":
+        return "#8c406e";
+        break;
+      case "Horror":
+        return "#8a773d";
+        break;
+      case "Thriller":
+        return "#57827a";
+        break;
+      case "Western":
+        return "#6a322a";
+        break;
+      case "War":
+        return "#cc8f8d";
+        break;
+    }
+    /*
+     In case we need more: 
+        #896d74
+    */
+  };
 
   var circleRadius = 2.5;
   var minTracks = 2;
@@ -305,7 +393,7 @@ d3.csv("movie_data.csv", function (dataset) {
     })
 
     // initialize all buttons as turned on
-    .classed("activatedGenre", true)
+    .classed("activatedGenre", true);
 
   /* Create a dropdown button for the x and y axis */
   var xSelector = d3
@@ -349,51 +437,50 @@ d3.csv("movie_data.csv", function (dataset) {
     updateGraph("y", selectedAttribute);
   });
 
-  d3.select(".filter_buttons").selectAll("input").on("click", function () {
-    var button = d3.select(this);
-    var genre = button.attr("id");
-    var current_status = button.attr("class");
+  d3.select(".filter_buttons")
+    .selectAll("input")
+    .on("click", function () {
+      var button = d3.select(this);
+      var genre = button.attr("id");
+      var current_status = button.attr("class");
 
-    // A bug might w/ removing non-existing value might occur in the future
-    // I am assuming that the exclusion set is empty at the start, and all boxes are checked
+      // A bug might w/ removing non-existing value might occur in the future
+      // I am assuming that the exclusion set is empty at the start, and all boxes are checked
 
-    // turing button off
-    if(current_status == "activatedGenre"){
-   
-      button.classed("activatedGenre", false)
-      button.classed("deactivatedGenre", true)
+      // turing button off
+      if (current_status == "activatedGenre") {
+        button.classed("activatedGenre", false);
+        button.classed("deactivatedGenre", true);
 
-      genreExclusionSet.add(genre)
+        genreExclusionSet.add(genre);
 
-      // TODO: Use CSS to create default styles for activated and deactivated.
-      // The size, margins, display, etc will overlap, but the background color and text color should be different
-      button.style("background-color", "gray")
-   
-    // turing button on
-    } else if(current_status == "deactivatedGenre"){
+        // TODO: Use CSS to create default styles for activated and deactivated.
+        // The size, margins, display, etc will overlap, but the background color and text color should be different
+        button.style("background-color", "gray");
 
-      button.classed("deactivatedGenre", false)
-      button.classed("activatedGenre", true)
-  
-      genreExclusionSet.delete(genre)
+        // turing button on
+      } else if (current_status == "deactivatedGenre") {
+        button.classed("deactivatedGenre", false);
+        button.classed("activatedGenre", true);
 
-      button.style("background-color", myColor(genre))
+        genreExclusionSet.delete(genre);
 
-    }
+        button.style("background-color", myColor(genre));
+      }
 
-    // update points
-    // this could be more efficent but I wasn't sure how to check the genre of a dot differently
-    dots
-      .transition()
-      .duration(500)
-      .attr("r", (d) => {
-        if (genreExclusionSet.has(genreAccessor(d))) {
-          return 0;
-        } else {
-          return circleRadius;
-        }
-      });
-  });
+      // update points
+      // this could be more efficent but I wasn't sure how to check the genre of a dot differently
+      dots
+        .transition()
+        .duration(500)
+        .attr("r", (d) => {
+          if (genreExclusionSet.has(genreAccessor(d))) {
+            return 0;
+          } else {
+            return circleRadius;
+          }
+        });
+    });
 
   /* Updates the graph when an axis attribute is changed 
   axis = 'x' if the x axis is changing, or 'y' if the y axis is changing */
@@ -448,4 +535,3 @@ d3.csv("movie_data.csv", function (dataset) {
     }
   };
 });
-
