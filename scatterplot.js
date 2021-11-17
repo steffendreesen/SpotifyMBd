@@ -203,7 +203,6 @@ d3.csv("movie_data.csv", function (dataset) {
       dimensions.margin.top,
     ]);
 
-  console.log(dataset)
   var myColor = d3.scaleOrdinal().domain(dataset).range(d3.schemePaired);
 
   var circleRadius = 2.5;

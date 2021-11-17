@@ -34,9 +34,9 @@ d3.csv("Genre_distances_no_tempo.csv", function (dataset) {
         top: 30,
         bottom: 100,
         right: 80,
-        left: 30,
+        left: 100,
         },
-        width: 1000,
+        width: 2000,
         height: 1000,
     };
 
@@ -44,11 +44,6 @@ d3.csv("Genre_distances_no_tempo.csv", function (dataset) {
     var svg = d3.select("#matrix")
                 .attr("width", dimensions.width)
                 .attr("height", dimensions.height)
-                .append("g")
-                    .attr(
-                    "transform",
-                    "translate(" + dimensions.margin.left + "," + dimensions.margin.top + ")"
-                    );
 
     var xScale = d3.scaleBand()
                     .domain(genres)
@@ -94,30 +89,32 @@ d3.csv("Genre_distances_no_tempo.csv", function (dataset) {
         .style("fill", function(d) { return myColor(700)} )
     */
 
-
-    console.log(dataset.length)
-    console.log(genres.length)
     // loop through all genres
-    for(var i = 0; i < dataset.length; i++){
+    for(var i = 0; i < genres.length; i++){
 
         // current genre
+        // dataset[i] is a row of distances
         var genre = dataset[i][""]
 
         // loop through all distances of the current genre
-        for(var j = 0; j < dataset.length; j++){
+        for(var j = 0; j < genres.length; j++){
 
             var other_genre = dataset[j][""]
 
             var distance = dataset[i][other_genre]
 
-            svg.selectAll("g")
+            svg
+                .append("a")
                 .append("rect")
+                //.append("input")
+                //.attr("type", "button")
+                .classed("matrix_button", true)
                 .attr("x", xScale(genre))
                 .attr("y", yScale(other_genre))
                 .attr("width", xScale.bandwidth() - 4)
                 .attr("height", yScale.bandwidth() - 4)
                 .attr("stroke", "black")
-                .attr("stroke-width", 2)
+                .attr("stroke-width", 1)
                 .style("fill", myColor(distance))
 
         }
