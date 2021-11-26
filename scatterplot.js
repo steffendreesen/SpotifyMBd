@@ -1,3 +1,6 @@
+const circleRadius = 2.5;
+const minTracks = 2;
+
 d3.csv("movie_data.csv", function (dataset) {
   var attributes_full = [
     "Average Valence",
@@ -293,23 +296,20 @@ d3.csv("movie_data.csv", function (dataset) {
     */
   };
 
-  var circleRadius = 2.5;
-  var minTracks = 2;
-
   var dots = svg
     .selectAll("circle")
     .data(dataset)
     .enter()
-    .append("circle")
     .filter((d) => d.Num_Tracks >= minTracks)
+    .append("circle")  
     .attr("cx", (d) => xScale(xAccessor(d)))
     .attr("cy", (d) => yScale(yAccessor(d)))
     .attr("fill", (d) => {
       return myColor(d.Genre_1);
-        console.log(id)
     })
     // if all the boxes start unchecked, this should be 0
-    .attr("r", circleRadius);
+    .attr("r", circleRadius)
+    .attr("class", (d) => {return d.Genre_1})
 
   // hovering functionality for dots
   dots
@@ -396,6 +396,9 @@ d3.csv("movie_data.csv", function (dataset) {
     // initialize all buttons as turned on
     .classed("activatedGenre", true);
 
+
+
+    
   /* Create a dropdown button for the x and y axis */
   var xSelector = d3
     .select("#xSelector")
@@ -437,6 +440,26 @@ d3.csv("movie_data.csv", function (dataset) {
 
     updateGraph("y", selectedAttribute);
   });
+
+  // hides all dots except for those belonging to genre1 or genre2
+  function show_two_genres(genre1, genre2){
+
+    genreExclusionSet.clear()
+    genreExclusionSet.add(genre1)
+    genreExclusionSet.add(genre2)
+
+    dots
+        .transition()
+        .duration(500)
+        .attr("r", (d) => {
+          if (genreExclusionSet.has(genreAccessor(d))) {
+            return 0;
+          } else {
+            return circleRadius;
+          }
+        });
+    
+  }
 
   d3.select(".filter_buttons")
     .selectAll("input")
@@ -536,3 +559,23 @@ d3.csv("movie_data.csv", function (dataset) {
     }
   };
 });
+
+// hides all dots except for those belonging to genre1 or genre2
+// This function is called whenever a matrix cell is clicked
+function show_two_genres(genre1, genre2){
+
+    var dots = d3.select("#scatterplot").select("g").selectAll("circle")
+
+    dots
+      .transition()
+      .duration(500)
+      .attr("r", (d) => {
+        var genre = d.Genre_1
+
+        if(!(genre == genre1 || genre == genre2)){
+          return 0
+        } else {
+          return circleRadius
+        }
+      })
+}

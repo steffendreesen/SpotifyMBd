@@ -108,12 +108,21 @@ d3.csv("Genre_distances_no_tempo.csv", function (dataset) {
     var first = true
 
     var clicked = function() {
+
         // current button
         var button = d3.select(this)      
         // previous button (could be the same as above)
         // there should only be 1 button with class selectedButton at a time
         var old_button = d3.select(".selectedButton")
-        console.log(old_button)
+
+
+        var cell_info = button.attr("id").split("_")
+
+        // create a new radar chart with the selected genres
+        build_radar(cell_info[0], cell_info[1])
+        
+        // show only these 2 genre on the scatterplot
+        show_two_genres(cell_info[0], cell_info[1])
 
         // handle the first button clicked
         if(first){
