@@ -1,4 +1,3 @@
-
 var attributes_full = [
   "Valence",
   "Danceability",
@@ -7,9 +6,9 @@ var attributes_full = [
   //"Average Loudness",
   //"Average Mode",
   "Speechiness",
-  "Acousticness",
   "Instrumentallness",
   "Liveness",
+  "Acousticness",
   //"Average Tempo",
 ];
 
@@ -97,10 +96,9 @@ var myColor = (genre) => {
       return "#cc8f8d";
       break;
   }
-  
-   // In case we need more: 
-    //  #896d74
-  
+
+  // In case we need more:
+  //  #896d74
 };
 var myColorTransparent = (genre) => {
   switch (genre) {
@@ -186,23 +184,18 @@ var myColorTransparent = (genre) => {
       return "#1Acc8f8d";
       break;
   }
-    //In case we need more: 
-    //  #33896d74
+  //In case we need more:
+  //  #33896d74
 };
 
-function build_radar(genre1, genre2){
-
+function build_radar(genre1, genre2) {
   // first I delete the canvas and make a new one
   // This solves a bug with the chart library
 
-  d3.select("#radar").remove()
-  d3.select(".radar-container")
-    .append("canvas")
-    .attr("id", "radar")
-
+  d3.select("#radar").remove();
+  d3.select(".radar-container").append("canvas").attr("id", "radar");
 
   d3.csv("Genre_average_attributes.csv", function (dataset) {
-
     // converting all values to numbers (d3.csv converts to String, need them to be numeric)
     dataset.forEach((d) => {
       d.Avg_Valence = +d.Avg_Valence;
@@ -218,8 +211,7 @@ function build_radar(genre1, genre2){
       d.Avg_Tempo = +d.Avg_Tempo;
     });
 
-    function get_genre_data(genre){
-
+    function get_genre_data(genre) {
       genre_data = dataset.filter((genre_set) => genre_set.Genre == genre)[0];
 
       genre_data = [
@@ -230,60 +222,58 @@ function build_radar(genre1, genre2){
         //genre_data.Avg_Loudness,
         //genre_data.Avg_Mode,
         genre_data.Avg_Speechiness,
-        genre_data.Avg_Acousticness,
         genre_data.Avg_Instrumentallness,
         genre_data.Avg_Liveness,
+        genre_data.Avg_Acousticness,
+
         //genre_data.Avg_Tempo,
       ];
 
-      return genre_data
+      return genre_data;
     }
 
+    var data = {
+      labels: attributes_full,
+      datasets: [
+        {
+          label: genre1,
+          data: get_genre_data(genre1),
+          fill: true,
+          backgroundColor: myColorTransparent(genre1),
+          borderColor: myColor(genre1),
+          pointBackgroundColor: myColor(genre1),
+          pointBorderColor: "#fff",
+          pointHoverBackgroundColor: "#fff",
+          pointHoverBorderColor: myColor(genre1),
+        },
+        {
+          label: genre2,
+          data: get_genre_data(genre2),
+          fill: true,
+          backgroundColor: myColorTransparent(genre2),
+          borderColor: myColor(genre2),
+          pointBackgroundColor: myColor(genre2),
+          pointBorderColor: "#fff",
+          pointHoverBackgroundColor: "#fff",
+          pointHoverBorderColor: myColor(genre2),
+        },
+      ],
+    };
 
-  var data = {
-    labels: attributes_full,
-    datasets: [
-      {
-        label: genre1,
-        data: get_genre_data(genre1),
-        fill: true,
-        backgroundColor: myColorTransparent(genre1),
-        borderColor: myColor(genre1),
-        pointBackgroundColor: myColor(genre1),
-        pointBorderColor: "#fff",
-        pointHoverBackgroundColor: "#fff",
-        pointHoverBorderColor: myColor(genre1),
-      },
-      {
-        label: genre2,
-        data: get_genre_data(genre2),
-        fill: true,
-        backgroundColor: myColorTransparent(genre2),
-        borderColor: myColor(genre2),
-        pointBackgroundColor: myColor(genre2),
-        pointBorderColor: "#fff",
-        pointHoverBackgroundColor: "#fff",
-        pointHoverBorderColor: myColor(genre2),
-      },
-    ],
-  };
-
-  var config = {
-    type: "radar",
-    data: data,
-    options: {
-      elements: {
-        line: {
-          borderWidth: 3,
+    var config = {
+      type: "radar",
+      data: data,
+      options: {
+        elements: {
+          line: {
+            borderWidth: 3,
+          },
         },
       },
-    },
-  };
+    };
 
-  myChart = new Chart(document.getElementById("radar"), config);
-
+    myChart = new Chart(document.getElementById("radar"), config);
   });
-
 }
 
-build_radar("Comedy", "Horror")
+build_radar("Comedy", "Horror");

@@ -1,5 +1,37 @@
 const circleRadius = 3;
 const minTracks = 2;
+const genres = [
+  "Drama",
+  "Comedy",
+  "Action",
+  "Documentary",
+  "Adventure",
+  "Adult",
+  "Short",
+  "Romance",
+  "Family",
+  //"History",
+  "Crime",
+  "Animation",
+  "Mystery",
+  "Biography",
+  //"News",
+  //"Sci-Fi",
+  "Musical",
+  "Sport",
+  "Fantasy",
+  "Music",
+  //"Game-Show",
+  //"Reality-TV",
+  //"Talk-TV",
+  "Horror",
+  "Thriller",
+  //"Western",
+  //"War",
+  "Other",
+  "All",
+];
+const genreExclusionSet = new Set();
 
 d3.csv("movie_data.csv", function (dataset) {
   var attributes_full = [
@@ -14,37 +46,6 @@ d3.csv("movie_data.csv", function (dataset) {
     "Average Instrumentallness",
     "Average Liveness",
     "Average Tempo",
-  ];
-
-  var genres = [
-    "Drama",
-    "Comedy",
-    "Action",
-    "Documentary",
-    "Adventure",
-    "Adult",
-    "Short",
-    "Romance",
-    "Family",
-    //"History",
-    "Crime",
-    "Animation",
-    "Mystery",
-    "Biography",
-    //"News",
-    //"Sci-Fi",
-    "Musical",
-    "Sport",
-    "Fantasy",
-    "Music",
-    //"Game-Show",
-    //"Reality-TV",
-    //"Talk-TV",
-    "Horror",
-    "Thriller",
-    //"Western",
-    //"War",
-    "Other",
   ];
 
   //converting all values to numbers (d3.csv converts to String, need them to be numeric)
@@ -81,12 +82,12 @@ d3.csv("movie_data.csv", function (dataset) {
   var dimensions = {
     margin: {
       top: 10,
-      bottom: 80,
+      bottom: 65,
       right: 0,
       left: 32,
     },
     width: 720,
-    height: 650,
+    height: 835,
   };
 
   // scatterplot
@@ -106,10 +107,6 @@ d3.csv("movie_data.csv", function (dataset) {
     .append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
-
-  //genres to exclude
-  //NOTE: discovered that Horror and Western are both light purple
-  var genreExclusionSet = new Set();
 
   var titleAccessor = (d) => d.Title;
   var genreAccessor = (d) => d.Genre_1;
@@ -306,6 +303,9 @@ d3.csv("movie_data.csv", function (dataset) {
       case "War":
         return "#cc8f8d";
         break;
+      case "All":
+        return "#62c083";
+        break;
     }
     /*
      In case we need more: 
@@ -372,12 +372,13 @@ d3.csv("movie_data.csv", function (dataset) {
     .style(
       "transform",
       `translateY(${dimensions.height - dimensions.margin.bottom}px)`
-    );
+    )
+    .attr("font-size", "13px");
 
   xAxis
     .append("text")
     .attr("class", "axis-label")
-    .attr("y", 40)
+    .attr("y", 48)
     .attr("x", dimensions.width / 2)
     .attr("fill", "black")
     .text(xAxisLabel);
@@ -385,7 +386,8 @@ d3.csv("movie_data.csv", function (dataset) {
   var yAxis = svg
     .append("g")
     .call(yAxisgen)
-    .style("transform", `translateX(${dimensions.margin.left}px)`);
+    .style("transform", `translateX(${dimensions.margin.left}px)`)
+    .attr("font-size", "13px");
 
   yAxis
     .append("text")
@@ -409,27 +411,15 @@ d3.csv("movie_data.csv", function (dataset) {
     .style("background-color", function (d) {
       return myColor(d);
     })
-
+    .style("font-size", "20px")
+    .style("padding", "7px")
+    .style("margin", "2px")
     .attr("id", function (d) {
       return d;
     })
-
     .attr("value", function (d) {
       return d;
-    })
-
-    // initialize all buttons as turned on
-    .classed("activatedGenre", true);
-
-  // var title = svg
-  //   .append("text")
-  //   .attr("id", "title")
-  //   .attr("x", dimensions.width / 2)
-  //   .attr("y", 0 - dimensions.margin.top / 2)
-  //   .attr("text-anchor", "middle")
-  //   .style("font-size", "32px")
-  //   .style("text-decoration", "underline")
-  //   .text("Genre 1 vs Genre 2 Scatterplot");
+    });
 
   /* Create a dropdown button for the x and y axis */
   var xSelector = d3
@@ -444,7 +434,8 @@ d3.csv("movie_data.csv", function (dataset) {
     }) // text showed in the menu
     .attr("value", function (d) {
       return d;
-    }); // corresponding value returned by the button
+    }) // corresponding value returned by the button
+    .property("selected", (d) => d === "Average Energy");
 
   var ySelector = d3
     .select("#ySelector")
@@ -458,7 +449,8 @@ d3.csv("movie_data.csv", function (dataset) {
     }) // text showed in the menu
     .attr("value", function (d) {
       return d;
-    }); // corresponding value returned by the button
+    }) // corresponding value returned by the button
+    .property("selected", (d) => d === "Average Loudness");
 
   /* Define a callback function for when the axis attribute selections are changed */
   d3.select("#xSelector").on("change", function () {
@@ -496,30 +488,30 @@ d3.csv("movie_data.csv", function (dataset) {
     .on("click", function () {
       var button = d3.select(this);
       var genre = button.attr("id");
-      var current_status = button.attr("class");
 
       // A bug might w/ removing non-existing value might occur in the future
       // I am assuming that the exclusion set is empty at the start, and all boxes are checked
 
-      // turing button off
-      if (current_status == "activatedGenre") {
-        button.classed("activatedGenre", false);
-        button.classed("deactivatedGenre", true);
-
+      // turning button off
+      if (!genreExclusionSet.has(genre)) {
         genreExclusionSet.add(genre);
 
-        // TODO: Use CSS to create default styles for activated and deactivated.
-        // The size, margins, display, etc will overlap, but the background color and text color should be different
-        button.style("background-color", "gray");
+        //update buttons
+        if (genre == "All") {
+          console.log("genre == all");
+          genres.forEach((g) => genreExclusionSet.add(g));
+        }
 
-        // turing button on
-      } else if (current_status == "deactivatedGenre") {
-        button.classed("deactivatedGenre", false);
-        button.classed("activatedGenre", true);
-
+        // turning button on
+      } else if (genreExclusionSet.has(genre)) {
         genreExclusionSet.delete(genre);
 
-        button.style("background-color", myColor(genre));
+        //update buttons
+        if (genre == "All") {
+          console.log("genre == all");
+
+          genres.forEach((g) => genreExclusionSet.delete(g));
+        }
       }
 
       // update points
@@ -532,6 +524,17 @@ d3.csv("movie_data.csv", function (dataset) {
             return 0;
           } else {
             return circleRadius;
+          }
+        });
+
+      // update button colors
+      d3.select(".filter_buttons")
+        .selectAll("input")
+        .style("background-color", (d) => {
+          if (genreExclusionSet.has(d)) {
+            return "gray";
+          } else {
+            return myColor(d);
           }
         });
     });
@@ -549,7 +552,7 @@ d3.csv("movie_data.csv", function (dataset) {
 
       xAxisgen.scale(xScale);
 
-      xAxis.transition().duration(5000).call(xAxisgen);
+      xAxis.transition().duration(1000).call(xAxisgen);
 
       // TODO: make the text change look smooth
       xAxis
@@ -560,7 +563,7 @@ d3.csv("movie_data.csv", function (dataset) {
 
       dots
         .transition()
-        .duration(5000)
+        .duration(1000)
         .attr("cx", (d) => xScale(xAccessor(d)));
     }
 
@@ -573,7 +576,7 @@ d3.csv("movie_data.csv", function (dataset) {
 
       yAxisgen.scale(yScale);
 
-      yAxis.transition().duration(5000).call(yAxisgen);
+      yAxis.transition().duration(1000).call(yAxisgen);
 
       // TODO: make the text change look smooth
       yAxis
@@ -584,7 +587,7 @@ d3.csv("movie_data.csv", function (dataset) {
 
       dots
         .transition()
-        .duration(5000)
+        .duration(1000)
         .attr("cy", (d) => yScale(yAccessor(d)));
     }
   };
@@ -595,16 +598,35 @@ d3.csv("movie_data.csv", function (dataset) {
 function show_two_genres(genre1, genre2) {
   var dots = d3.select("#scatterplot").select("g").selectAll("circle");
 
+  console.log(genres);
+
+  genreExclusionSet.clear();
+  genres.forEach((g) => genreExclusionSet.add(g));
+  genreExclusionSet.delete(genre1);
+  genreExclusionSet.delete(genre2);
+
+  //updating dots
   dots
     .transition()
     .duration(500)
     .attr("r", (d) => {
       var genre = d.Genre_1;
 
-      if (!(genre == genre1 || genre == genre2)) {
+      if (genreExclusionSet.has(genre)) {
         return 0;
       } else {
         return circleRadius;
+      }
+    });
+
+  //updating buttons
+  d3.select(".filter_buttons")
+    .selectAll("input")
+    .style("background-color", (d) => {
+      if (genreExclusionSet.has(d)) {
+        return "gray";
+      } else {
+        return myColor(d);
       }
     });
 }
