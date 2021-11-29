@@ -1,4 +1,4 @@
-const circleRadius = 2.5;
+const circleRadius = 3;
 const minTracks = 2;
 
 d3.csv("movie_data.csv", function (dataset) {
@@ -26,23 +26,25 @@ d3.csv("movie_data.csv", function (dataset) {
     "Short",
     "Romance",
     "Family",
-    "History",
+    //"History",
     "Crime",
     "Animation",
     "Mystery",
     "Biography",
-    "News",
-    "Sci-Fi",
+    //"News",
+    //"Sci-Fi",
     "Musical",
     "Sport",
     "Fantasy",
     "Music",
-    "Game-Show",
-    "Reality-TV",
+    //"Game-Show",
+    //"Reality-TV",
+    //"Talk-TV",
     "Horror",
     "Thriller",
-    "Western",
-    "War",
+    //"Western",
+    //"War",
+    "Other",
   ];
 
   //converting all values to numbers (d3.csv converts to String, need them to be numeric)
@@ -58,6 +60,21 @@ d3.csv("movie_data.csv", function (dataset) {
     d.Avg_Instrumentallness = +d.Avg_Instrumentallness;
     d.Avg_Liveness = +d.Avg_Liveness;
     d.Avg_Tempo = +d.Avg_Tempo;
+
+    //adjusting genres
+    excludedGenres = new Set();
+    excludedGenres.add("War");
+    excludedGenres.add("History");
+    excludedGenres.add("News");
+    excludedGenres.add("Game-Show");
+    excludedGenres.add("Talk-Show");
+    excludedGenres.add("Reality-TV");
+    excludedGenres.add("Sci-Fi");
+    excludedGenres.add("Western");
+    excludedGenres.add("War");
+    if (excludedGenres.has(d.Genre_1)) {
+      d.Genre_1 = "Other";
+    }
   });
 
   // scatterplot dimensions
@@ -283,7 +300,7 @@ d3.csv("movie_data.csv", function (dataset) {
       case "Thriller":
         return "#57827a";
         break;
-      case "Western":
+      case "Other":
         return "#6a322a";
         break;
       case "War":
@@ -301,7 +318,7 @@ d3.csv("movie_data.csv", function (dataset) {
     .data(dataset)
     .enter()
     .filter((d) => d.Num_Tracks >= minTracks)
-    .append("circle")  
+    .append("circle")
     .attr("cx", (d) => xScale(xAccessor(d)))
     .attr("cy", (d) => yScale(yAccessor(d)))
     .attr("fill", (d) => {
@@ -309,8 +326,10 @@ d3.csv("movie_data.csv", function (dataset) {
     })
     // if all the boxes start unchecked, this should be 0
     .attr("r", circleRadius)
-    .attr("class", (d) => {return d.Genre_1})
-    .attr("opacity", 0.7)
+    .attr("class", (d) => {
+      return d.Genre_1;
+    })
+    .attr("opacity", 0.7);
 
   // hovering functionality for dots
   dots
@@ -397,15 +416,16 @@ d3.csv("movie_data.csv", function (dataset) {
     // initialize all buttons as turned on
     .classed("activatedGenre", true);
 
-  var title = svg.append("text")
-                .attr("id", "title")
-                .attr("x", (dimensions.width / 2))             
-                .attr("y", 0 - (dimensions.margin.top / 2))
-                .attr("text-anchor", "middle")  
-                .style("font-size", "32px") 
-                .style("text-decoration", "underline")  
-                .text("Genre 1 vs Genre 2 Scatterplot");
-    
+  var title = svg
+    .append("text")
+    .attr("id", "title")
+    .attr("x", dimensions.width / 2)
+    .attr("y", 0 - dimensions.margin.top / 2)
+    .attr("text-anchor", "middle")
+    .style("font-size", "32px")
+    .style("text-decoration", "underline")
+    .text("Genre 1 vs Genre 2 Scatterplot");
+
   /* Create a dropdown button for the x and y axis */
   var xSelector = d3
     .select("#xSelector")
@@ -449,23 +469,21 @@ d3.csv("movie_data.csv", function (dataset) {
   });
 
   // hides all dots except for those belonging to genre1 or genre2
-  function show_two_genres(genre1, genre2){
-
-    genreExclusionSet.clear()
-    genreExclusionSet.add(genre1)
-    genreExclusionSet.add(genre2)
+  function show_two_genres(genre1, genre2) {
+    genreExclusionSet.clear();
+    genreExclusionSet.add(genre1);
+    genreExclusionSet.add(genre2);
 
     dots
-        .transition()
-        .duration(500)
-        .attr("r", (d) => {
-          if (genreExclusionSet.has(genreAccessor(d))) {
-            return 0;
-          } else {
-            return circleRadius;
-          }
-        });
-    
+      .transition()
+      .duration(500)
+      .attr("r", (d) => {
+        if (genreExclusionSet.has(genreAccessor(d))) {
+          return 0;
+        } else {
+          return circleRadius;
+        }
+      });
   }
 
   d3.select(".filter_buttons")
@@ -569,21 +587,19 @@ d3.csv("movie_data.csv", function (dataset) {
 
 // hides all dots except for those belonging to genre1 or genre2
 // This function is called whenever a matrix cell is clicked
-function show_two_genres(genre1, genre2){
+function show_two_genres(genre1, genre2) {
+  var dots = d3.select("#scatterplot").select("g").selectAll("circle");
 
-    var dots = d3.select("#scatterplot").select("g").selectAll("circle")
+  dots
+    .transition()
+    .duration(500)
+    .attr("r", (d) => {
+      var genre = d.Genre_1;
 
-    dots
-      .transition()
-      .duration(500)
-      .attr("r", (d) => {
-        var genre = d.Genre_1
-
-        if(!(genre == genre1 || genre == genre2)){
-          return 0
-        } else {
-          return circleRadius * 2
-        }
-      })
-      
+      if (!(genre == genre1 || genre == genre2)) {
+        return 0;
+      } else {
+        return circleRadius;
+      }
+    });
 }
