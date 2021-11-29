@@ -36,8 +36,8 @@ d3.csv("Genre_distances_no_tempo.csv", function (dataset) {
         right: 80,
         left: 100,
         },
-        width: 2000,
-        height: 1000,
+        width: 600,
+        height: 600,
     };
 
 
@@ -68,7 +68,9 @@ d3.csv("Genre_distances_no_tempo.csv", function (dataset) {
         .style(
         "transform",
         `translateY(${dimensions.height - dimensions.margin.bottom}px)`
-        );
+        )
+        .selectAll("text")
+            .attr("transform", "translate(-10,20)rotate(-55)");
 
     var yAxis = svg
         .append("g")

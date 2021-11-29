@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="styles.css" />
   </head>
   <body>
-    <h1>Scatterplot with interactive axis attributes</h1>
+    <!-- <h1>Scatterplot with interactive axis attributes</h1>
 
     <div id="filter_buttons" class="filter_buttons"></div>
     <svg id="scatterplot"></svg>
@@ -18,16 +18,31 @@
     <button id="ySelector"></button>
 
     <h1>Genre Similarity Matrix</h1>
-    <svg id="matrix"></svg>
+    <svg id="matrix"></svg> -->
 
-    <h1>Radar</h1>
-    <div class="radar-container">
-      <canvas id="radar"></canvas>
+     
+    
+    <div class = "wrapper">
+      <div class= "scatter-container">
+        
+        <div id="filter_buttons" class="filter_buttons"></div>
+        <svg id="scatterplot"></svg>
+        <div>Temp Gap For Selectors</div>
+        <button id="xSelector"></button>
+        <button id="ySelector"></button>
+      </div>
+      <div class="radar-container">
+        
+        <canvas id="radar"></canvas>
+      </div> 
+      <div class= "matrix-container">
+        
+        <svg id="matrix"></svg>
+      </div>
     </div>
   </body>
 
   <script src="scatterplot.js"></script>
-  <script src="radar.js"></script>
+   <script src="radar.js"></script> 
   <script src="matrix.js"></script>
-  
 </html>

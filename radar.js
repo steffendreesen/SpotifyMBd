@@ -1,15 +1,15 @@
 
 var attributes_full = [
-  "Average Valence",
-  "Average Danceability",
-  "Average Energy",
+  "Valence",
+  "Danceability",
+  "Energy",
   //"Average Key",
   //"Average Loudness",
   //"Average Mode",
-  "Average Speechiness",
-  "Average Acousticness",
-  "Average Instrumentallness",
-  "Average Liveness",
+  "Speechiness",
+  "Acousticness",
+  "Instrumentallness",
+  "Liveness",
   //"Average Tempo",
 ];
 

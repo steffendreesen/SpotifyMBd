@@ -68,8 +68,8 @@ d3.csv("movie_data.csv", function (dataset) {
       right: 80,
       left: 60,
     },
-    width: 1300,
-    height: 700,
+    width: 500,
+    height: 500,
   };
 
   // scatterplot
@@ -100,8 +100,8 @@ d3.csv("movie_data.csv", function (dataset) {
   // Initialize attributes of x and y axis
   // TODO: Make these defaults show in the dropdown at the start
   // These were x = Energy and y = Loudness
-  var x_attribute = "Average Valence";
-  var y_attribute = "Average Valence";
+  var x_attribute = "Average Energy";
+  var y_attribute = "Average Loudness";
 
   var xAxisLabel = x_attribute;
   var yAxisLabel = y_attribute;
