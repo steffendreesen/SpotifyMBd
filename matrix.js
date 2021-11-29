@@ -33,12 +33,12 @@ d3.csv("Genre_distances_no_tempo_fewer_genres.csv", function (dataset) {
   var dimensions = {
     margin: {
       top: 10,
-      bottom: 100,
+      bottom: 105,
       right: 0,
-      left: 70,
+      left: 85,
     },
     width: 700,
-    height: 790,
+    height: 830,
   };
 
   var svg = d3
@@ -76,12 +76,14 @@ d3.csv("Genre_distances_no_tempo_fewer_genres.csv", function (dataset) {
       `translateY(${dimensions.height - dimensions.margin.bottom}px)`
     )
     .selectAll("text")
-    .attr("transform", "translate(-10,20)rotate(-55)");
+    .attr("transform", "translate(-10,30)rotate(-55)")
+    .attr("font-size", "13px");
 
   var yAxis = svg
     .append("g")
     .call(yAxisgen)
-    .style("transform", `translateX(${dimensions.margin.left}px)`);
+    .style("transform", `translateX(${dimensions.margin.left}px)`)
+    .attr("font-size", "13px");
 
   //var myColor = d3.scaleLinear().domain([0, 20]).range(["#4713a8", "white"]);
   var myColor = d3.scaleLinear().domain([0, 4]).range(["white", "green"]);
@@ -124,9 +126,6 @@ d3.csv("Genre_distances_no_tempo_fewer_genres.csv", function (dataset) {
 
     // show only these 2 genre on the scatterplot
     show_two_genres(cell_info[0], cell_info[1]);
-
-    var new_title = cell_info[0] + " vs " + cell_info[1];
-    d3.select("#scatterplot").select("#title").text(new_title);
 
     // handle the first button clicked
     if (first) {

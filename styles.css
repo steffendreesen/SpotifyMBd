@@ -22,11 +22,12 @@ body {
 }
 
 .top-banner {
-  background-color: #1DB954;
-  padding: 25px;
+  background-color: #62c083;
+  padding: 10px;
   text-align: center;
-  font-size: 50px;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 40px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
 .radar-container {
@@ -34,31 +35,32 @@ body {
   height: 500px !important; */
   width: 1fr;
   height: 1fr;
-  border: 3px solid black;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
 }
+
 .scatter-container {
   /* width: 500px !important;
   height: 500px !important; */
   width: 1fr;
   height: 1fr;
-  border: 3px solid black;
+  border: 2px solid black;
 }
 .matrix-container {
   /* width: 500px !important;
   height: 500px !important; */
   width: 1fr;
   height: 1fr;
-  border: 3px solid black;
+  border: 2px solid black;
 }
-.wrapper{
-  display:grid;
+.wrapper {
+  display: grid;
   grid-template-columns: 40% 20% 40%;
   /* grid-template-rows: 70% 30%; */
-  
 }
-.wrapper > div{
+.wrapper > div {
   /* background: #eee; */
-  padding:1em;
+  padding: 1em;
 }
 
 .axis-label {
@@ -66,5 +68,20 @@ body {
 }
 
 .axis-selector {
-  font-size: 40px;
+  font-size: 30px;
+  padding-bottom: 10px;
+  padding-top: 5px;
+}
+
+.button-container {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.axis-selector1-container {
+  margin-bottom: 10px;
+}
+
+.axis-selector2-container {
+  margin-bottom: 10px;
 }

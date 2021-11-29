@@ -9,36 +9,33 @@
     <link rel="stylesheet" type="text/css" href="styles.css" />
   </head>
   <body>
-    <!-- <h1>Scatterplot with interactive axis attributes</h1>
-
-    <div id="filter_buttons" class="filter_buttons"></div>
-    <svg id="scatterplot"></svg>
-    <div>Temp Gap For Selectors</div>
-    <button id="xSelector"></button>
-    <button id="ySelector"></button>
-
-    <h1>Genre Similarity Matrix</h1>
-    <svg id="matrix"></svg> -->
-
     <div class="top-banner">
       CPSC 4030 Data Visualization Project: SpotifyMDb
     </div>
 
     <div class="wrapper">
       <div class="scatter-container">
-        <div id="filter_buttons" class="filter_buttons"></div>
         <svg id="scatterplot"></svg>
-        <div></div>
-        <div>
-          <button class="axis-selector" id="xSelector">Change X Axis</button>
-        </div>
-        <div></div>
-        <div>
-          <button class="axis-selector" id="ySelector">Change Y Axis</button>
-        </div>
       </div>
       <div class="radar-container">
         <canvas id="radar"></canvas>
+        <div class="button-container">
+          <div id="filter_buttons" class="filter_buttons"></div>
+        </div>
+        <div class="axis-selector1-container">
+          <div>
+            <button class="axis-selector" id="xSelector">
+              X-Axis Attribute
+            </button>
+          </div>
+        </div>
+        <div class="axis-selector2-container">
+          <div>
+            <button class="axis-selector" id="ySelector">
+              Y-Axis Attribute
+            </button>
+          </div>
+        </div>
       </div>
       <div class="matrix-container">
         <svg id="matrix"></svg>
