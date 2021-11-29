@@ -15,177 +15,95 @@ var attributes_full = [
 var myColor = (genre) => {
   switch (genre) {
     case "Drama":
-      return "#d148a4";
-      break;
+      return "#8eb4be";
     case "Comedy":
-      return "#6dd3c7";
-      break;
+      return "#ffacc9";
     case "Action":
-      return "#5d3ac1";
-      break;
+      return "#736690";
     case "Documentary":
-      return "#cbd465";
-      break;
+      return "#567442";
     case "Adventure":
-      return "#be4dd5";
-      break;
+      return "#ccae86";
     case "Adult":
-      return "#68d98d";
-      break;
+      return "#000a3b";
     case "Short":
-      return "#482871";
-      break;
+      return "#540036";
     case "Romance":
-      return "#db4885";
-      break;
+      return "#ac5f41";
     case "Family":
-      return "#7674d5";
-      break;
-    case "History":
-      return "#d6a240";
-      break;
+      return "#b2c065";
     case "Crime":
-      return "#5d78aa";
-      break;
+      return "#03efea";
     case "Animation":
-      return "#dc4528";
-      break;
+      return "#82ffcc";
     case "Mystery":
-      return "#78d747";
-      break;
+      return "#0287e7";
     case "Biography":
-      return "#cf4560";
-      break;
-    case "News":
-      return "#54883e";
-      break;
-    case "Sci-Fi":
-      return "#cf95ce";
-      break;
+      return "#cb4b8a";
     case "Musical":
-      return "#344326";
-      break;
+      return "#a597ff";
     case "Sport":
-      return "#98bada";
-      break;
+      return "#723eb6";
     case "Fantasy":
-      return "#c06738";
-      break;
+      return "#e68700";
     case "Music":
-      return "#392e44";
-      break;
-    case "Game-Show":
-      return "#98322e";
-      break;
-    case "Talk-Show":
-      return "#3b5b6e";
-      break;
-    case "Reality-TV":
-      return "#8c406e";
-      break;
+      return "#ffd41f";
     case "Horror":
-      return "#8a773d";
-      break;
+      return "#d10011";
     case "Thriller":
-      return "#57827a";
-      break;
-    case "Western":
-      return "#6a322a";
-      break;
-    case "War":
-      return "#cc8f8d";
-      break;
+      return "#8ee200";
+    case "Other":
+      return "#ed2be3";
+    case "All":
+      return "#62c083";
   }
-
-  // In case we need more:
-  //  #896d74
 };
+
 var myColorTransparent = (genre) => {
   switch (genre) {
     case "Drama":
-      return "#1Ad148a4";
-      break;
+      return "#8eb4be4d";
     case "Comedy":
-      return "#1A6dd3c7";
-      break;
+      return "#ffacc94d";
     case "Action":
-      return "#1A5d3ac1";
-      break;
+      return "#7366904d";
     case "Documentary":
-      return "#1Acbd465";
-      break;
+      return "#5674424d";
     case "Adventure":
-      return "#1Abe4dd5";
-      break;
+      return "#ccae864d";
     case "Adult":
-      return "#1A68d98d";
-      break;
+      return "#000a3b4d";
     case "Short":
-      return "#1A482871";
-      break;
+      return "#5400364d";
     case "Romance":
-      return "#1Adb4885";
-      break;
+      return "#ac5f414d";
     case "Family":
-      return "#1A7674d5";
-      break;
-    case "History":
-      return "#1Ad6a240";
-      break;
+      return "#b2c0654d";
     case "Crime":
-      return "#1A5d78aa";
-      break;
+      return "#03efea4d";
     case "Animation":
-      return "#1Adc4528";
-      break;
+      return "#82ffcc4d";
     case "Mystery":
-      return "#1A78d747";
-      break;
+      return "#0287e74d";
     case "Biography":
-      return "#1Acf4560";
-      break;
-    case "News":
-      return "#1A54883e";
-      break;
-    case "Sci-Fi":
-      return "#1Acf95ce";
-      break;
+      return "#cb4b8a4d";
     case "Musical":
-      return "#1A344326";
-      break;
+      return "#a597ff4d";
     case "Sport":
-      return "#1A98bada";
-      break;
+      return "#723eb64d";
     case "Fantasy":
-      return "#1Ac06738";
-      break;
+      return "#e687004d";
     case "Music":
-      return "#1A392e44";
-      break;
-    case "Game-Show":
-      return "#1A98322e";
-      break;
-    case "Talk-Show":
-      return "#1A3b5b6e";
-      break;
-    case "Reality-TV":
-      return "#1A8c406e";
-      break;
+      return "#ffd41f4d";
     case "Horror":
-      return "#1A8a773d";
-      break;
+      return "#d100114d";
     case "Thriller":
-      return "#1A57827a";
-      break;
-    case "Western":
-      return "#1A6a322a";
-      break;
-    case "War":
-      return "#1Acc8f8d";
-      break;
+      return "#8ee2004d";
+    case "Other":
+      return "#ed2be34d";
+    case "All":
+      return "#62c0834d";
   }
-  //In case we need more:
-  //  #33896d74
 };
 
 function build_radar(genre1, genre2) {
@@ -225,7 +143,6 @@ function build_radar(genre1, genre2) {
         genre_data.Avg_Instrumentallness,
         genre_data.Avg_Liveness,
         genre_data.Avg_Acousticness,
-
         //genre_data.Avg_Tempo,
       ];
 

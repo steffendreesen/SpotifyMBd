@@ -223,94 +223,69 @@ d3.csv("movie_data.csv", function (dataset) {
   var myColor = (genre) => {
     switch (genre) {
       case "Drama":
-        return "#d148a4";
+        return "#8eb4be";
         break;
       case "Comedy":
-        return "#6dd3c7";
+        return "#ffacc9";
         break;
       case "Action":
-        return "#5d3ac1";
+        return "#736690";
         break;
       case "Documentary":
-        return "#cbd465";
+        return "#567442";
         break;
       case "Adventure":
-        return "#be4dd5";
+        return "#ccae86";
         break;
       case "Adult":
-        return "#68d98d";
+        return "#000a3b";
         break;
       case "Short":
-        return "#482871";
+        return "#540036";
         break;
       case "Romance":
-        return "#db4885";
+        return "#ac5f41";
         break;
       case "Family":
-        return "#7674d5";
-        break;
-      case "History":
-        return "#d6a240";
+        return "#b2c065";
         break;
       case "Crime":
-        return "#5d78aa";
+        return "#03efea";
         break;
       case "Animation":
-        return "#dc4528";
+        return "#82ffcc";
         break;
       case "Mystery":
-        return "#78d747";
+        return "#0287e7";
         break;
       case "Biography":
-        return "#cf4560";
-        break;
-      case "News":
-        return "#54883e";
-        break;
-      case "Sci-Fi":
-        return "#cf95ce";
+        return "#cb4b8a";
         break;
       case "Musical":
-        return "#344326";
+        return "#a597ff";
         break;
       case "Sport":
-        return "#98bada";
+        return "#723eb6";
         break;
       case "Fantasy":
-        return "#c06738";
+        return "#e68700";
         break;
       case "Music":
-        return "#392e44";
-        break;
-      case "Game-Show":
-        return "#98322e";
-        break;
-      case "Talk-Show":
-        return "#3b5b6e";
-        break;
-      case "Reality-TV":
-        return "#8c406e";
+        return "#ffd41f";
         break;
       case "Horror":
-        return "#8a773d";
+        return "#d10011";
         break;
       case "Thriller":
-        return "#57827a";
+        return "#8ee200";
         break;
       case "Other":
-        return "#6a322a";
-        break;
-      case "War":
-        return "#cc8f8d";
+        return "#ed2be3";
         break;
       case "All":
         return "#62c083";
         break;
     }
-    /*
-     In case we need more: 
-        #896d74
-    */
   };
 
   var dots = svg
