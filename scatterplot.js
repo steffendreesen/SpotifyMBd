@@ -80,13 +80,13 @@ d3.csv("movie_data.csv", function (dataset) {
   // scatterplot dimensions
   var dimensions = {
     margin: {
-      top: 30,
-      bottom: 100,
-      right: 80,
-      left: 60,
+      top: 10,
+      bottom: 80,
+      right: 0,
+      left: 32,
     },
-    width: 600,
-    height: 600,
+    width: 720,
+    height: 650,
   };
 
   // scatterplot
@@ -337,7 +337,8 @@ d3.csv("movie_data.csv", function (dataset) {
       d3.select(this)
         .transition()
         .duration("100")
-        .attr("r", circleRadius * 4);
+        .attr("r", circleRadius * 4)
+        .attr("opacity", 1);
       div.transition().duration(100).style("opacity", 1);
       div
         .html(
@@ -354,7 +355,11 @@ d3.csv("movie_data.csv", function (dataset) {
         .style("top", d3.event.pageY - 15 + "px");
     })
     .on("mouseout", function (d, i) {
-      d3.select(this).transition().duration("200").attr("r", circleRadius);
+      d3.select(this)
+        .transition()
+        .duration("200")
+        .attr("r", circleRadius)
+        .attr("opacity", 0.7);
       div.transition().duration("200").style("opacity", 0);
     });
 
@@ -416,15 +421,15 @@ d3.csv("movie_data.csv", function (dataset) {
     // initialize all buttons as turned on
     .classed("activatedGenre", true);
 
-  var title = svg
-    .append("text")
-    .attr("id", "title")
-    .attr("x", dimensions.width / 2)
-    .attr("y", 0 - dimensions.margin.top / 2)
-    .attr("text-anchor", "middle")
-    .style("font-size", "32px")
-    .style("text-decoration", "underline")
-    .text("Genre 1 vs Genre 2 Scatterplot");
+  // var title = svg
+  //   .append("text")
+  //   .attr("id", "title")
+  //   .attr("x", dimensions.width / 2)
+  //   .attr("y", 0 - dimensions.margin.top / 2)
+  //   .attr("text-anchor", "middle")
+  //   .style("font-size", "32px")
+  //   .style("text-decoration", "underline")
+  //   .text("Genre 1 vs Genre 2 Scatterplot");
 
   /* Create a dropdown button for the x and y axis */
   var xSelector = d3

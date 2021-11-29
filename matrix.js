@@ -34,11 +34,11 @@ d3.csv("Genre_distances_no_tempo_fewer_genres.csv", function (dataset) {
     margin: {
       top: 10,
       bottom: 100,
-      right: 230,
+      right: 0,
       left: 70,
     },
-    width: 800,
-    height: 800,
+    width: 700,
+    height: 790,
   };
 
   var svg = d3

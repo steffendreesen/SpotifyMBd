@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Group 5 Project</title>
+    <title>SpotifyMDb</title>
     <script src="https://d3js.org/d3.v4.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -20,11 +20,12 @@
     <h1>Genre Similarity Matrix</h1>
     <svg id="matrix"></svg> -->
 
-    <div class = "top-banner">CPSC 4030 Data Visualization Project: SpotifyMBD</div>
+    <div class="top-banner">
+      CPSC 4030 Data Visualization Project: SpotifyMDb
+    </div>
 
-    <div class = "wrapper">
-      <div class= "scatter-container">
-        
+    <div class="wrapper">
+      <div class="scatter-container">
         <div id="filter_buttons" class="filter_buttons"></div>
         <svg id="scatterplot"></svg>
         <div></div>
@@ -33,27 +34,19 @@
         </div>
         <div></div>
         <div>
-        <button class="axis-selector" id="ySelector">Change Y Axis</button>
+          <button class="axis-selector" id="ySelector">Change Y Axis</button>
         </div>
       </div>
       <div class="radar-container">
-        
         <canvas id="radar"></canvas>
-      </div> 
-      <div class= "matrix-container">
-        
+      </div>
+      <div class="matrix-container">
         <svg id="matrix"></svg>
       </div>
-    </div>
-
-    <div>
-      <p>
-        Visualizing data from IMBD and Spotify
-      </p>
     </div>
   </body>
 
   <script src="scatterplot.js"></script>
-   <script src="radar.js"></script> 
+  <script src="radar.js"></script>
   <script src="matrix.js"></script>
 </html>
