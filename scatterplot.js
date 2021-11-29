@@ -387,6 +387,7 @@ d3.csv("movie_data.csv", function (dataset) {
       return myColor(d);
     })
     .style("font-size", "20px")
+    .style("color", "white")
     .style("padding", "7px")
     .style("margin", "2px")
     .attr("id", function (d) {
