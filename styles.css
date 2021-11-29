@@ -34,18 +34,21 @@ body {
   height: 500px !important; */
   width: 1fr;
   height: 1fr;
+  border: 3px solid black;
 }
 .scatter-container {
   /* width: 500px !important;
   height: 500px !important; */
   width: 1fr;
   height: 1fr;
+  border: 3px solid black;
 }
 .matrix-container {
   /* width: 500px !important;
   height: 500px !important; */
   width: 1fr;
   height: 1fr;
+  border: 3px solid black;
 }
 .wrapper{
   display:grid;
@@ -56,4 +59,8 @@ body {
 .wrapper > div{
   /* background: #eee; */
   padding:1em;
+}
+
+.axis-label {
+  font-size: 30px;
 }

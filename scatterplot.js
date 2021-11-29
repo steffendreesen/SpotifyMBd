@@ -310,6 +310,7 @@ d3.csv("movie_data.csv", function (dataset) {
     // if all the boxes start unchecked, this should be 0
     .attr("r", circleRadius)
     .attr("class", (d) => {return d.Genre_1})
+    .attr("opacity", 0.7)
 
   // hovering functionality for dots
   dots
@@ -396,8 +397,14 @@ d3.csv("movie_data.csv", function (dataset) {
     // initialize all buttons as turned on
     .classed("activatedGenre", true);
 
-
-
+  var title = svg.append("text")
+                .attr("id", "title")
+                .attr("x", (dimensions.width / 2))             
+                .attr("y", 0 - (dimensions.margin.top / 2))
+                .attr("text-anchor", "middle")  
+                .style("font-size", "32px") 
+                .style("text-decoration", "underline")  
+                .text("Genre 1 vs Genre 2 Scatterplot");
     
   /* Create a dropdown button for the x and y axis */
   var xSelector = d3
@@ -575,7 +582,8 @@ function show_two_genres(genre1, genre2){
         if(!(genre == genre1 || genre == genre2)){
           return 0
         } else {
-          return circleRadius
+          return circleRadius * 2
         }
       })
+      
 }

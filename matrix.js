@@ -126,6 +126,12 @@ d3.csv("Genre_distances_no_tempo.csv", function (dataset) {
         // show only these 2 genre on the scatterplot
         show_two_genres(cell_info[0], cell_info[1])
 
+        var new_title = cell_info[0] + " vs " + cell_info[1]
+        d3.select("#scatterplot")
+            .select("#title")
+            .text(new_title)
+
+
         // handle the first button clicked
         if(first){
             first = false
