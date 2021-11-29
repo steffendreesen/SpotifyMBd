@@ -17,6 +17,18 @@ h2 {
   text-align: left;
 }
 
+body {
+  margin: 0;
+}
+
+.top-banner {
+  background-color: #1DB954;
+  padding: 25px;
+  text-align: center;
+  font-size: 50px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
 .radar-container {
   /* width: 500px !important;
   height: 500px !important; */

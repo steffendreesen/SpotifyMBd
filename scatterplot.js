@@ -68,8 +68,8 @@ d3.csv("movie_data.csv", function (dataset) {
       right: 80,
       left: 60,
     },
-    width: 500,
-    height: 500,
+    width: 600,
+    height: 600,
   };
 
   // scatterplot
