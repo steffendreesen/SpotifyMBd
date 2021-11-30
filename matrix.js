@@ -88,6 +88,11 @@ d3.csv("Genre_distances_no_tempo_fewer_genres.csv", function (dataset) {
   //var myColor = d3.scaleLinear().domain([0, 20]).range(["#4713a8", "white"]);
   var myColor = d3.scaleLinear().domain([0, 4]).range(["white", "green"]);
 
+  var matrixColor = d3.scaleSequential()
+                .domain([0, 4])
+                .interpolator(d3.interpolateViridis);
+
+
   /*
     svg.selectAll()
         .data(dataset)
@@ -133,7 +138,7 @@ d3.csv("Genre_distances_no_tempo_fewer_genres.csv", function (dataset) {
 
       button.classed("unselectedButton", false);
       button.classed("selectedButton", true);
-      button.style("fill", "gold");
+      button.style("fill", "white");
       return;
     }
 
@@ -161,13 +166,15 @@ d3.csv("Genre_distances_no_tempo_fewer_genres.csv", function (dataset) {
       // update the old and new buttons
       old_button.classed("selectedButton", false);
       old_button.classed("unselectedButton", true);
-      old_button.style("fill", myColor(old_distance));
+      old_button.style("fill", matrixColor(old_distance));
 
       button.classed("unselectedButton", false);
       button.classed("selectedButton", true);
-      button.style("fill", "gold");
+      button.style("fill", "white");
     }
   };
+
+  // Set up Matrix
 
   // loop through all genres
   for (var i = 0; i < genres.length; i++) {
@@ -196,7 +203,7 @@ d3.csv("Genre_distances_no_tempo_fewer_genres.csv", function (dataset) {
         .attr("height", yScale.bandwidth())
         .attr("stroke", "black")
         .attr("stroke-width", 1)
-        .style("fill", myColor(distance))
+        .style("fill", matrixColor(distance))
         .on("mouseover", mouseover)
         .on("mouseout", mouseout)
         .on("click", clicked);
