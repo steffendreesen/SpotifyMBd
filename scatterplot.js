@@ -387,7 +387,11 @@ d3.csv("movie_data.csv", function (dataset) {
       return myColor(d);
     })
     .style("font-size", "20px")
-    .style("color", "white")
+    .style("color", (d) => {
+      if (d == "Adult" || d == "Short") {
+        return "white";
+      }
+    })
     .style("padding", "7px")
     .style("margin", "2px")
     .attr("id", function (d) {
@@ -511,6 +515,16 @@ d3.csv("movie_data.csv", function (dataset) {
             return "gray";
           } else {
             return myColor(d);
+          }
+        })
+        .style("color", (d) => {
+          if (genreExclusionSet.has(d) && (d == "Adult" || d == "Short")) {
+            return "black";
+          } else if (
+            !genreExclusionSet.has(d) &&
+            (d == "Adult" || d == "Short")
+          ) {
+            return "white";
           }
         });
     });
