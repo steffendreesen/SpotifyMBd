@@ -107,11 +107,13 @@ d3.csv("Genre_distances_no_tempo_fewer_genres.csv", function (dataset) {
 
   // function is called when a rect is hovered over
   var mouseover = function () {
-    d3.select(this).attr("stroke-width", 4);
+    d3.select(this)
+      .attr("stroke-width", 4)
   };
 
   var mouseout = function () {
-    d3.select(this).attr("stroke-width", 1);
+    d3.select(this)
+      .attr("stroke-width", 1)
   };
 
   // first button clicked
