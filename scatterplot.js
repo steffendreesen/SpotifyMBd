@@ -507,7 +507,7 @@ d3.csv("movie_data.csv", function (dataset) {
           }
         });
 
-      // update button colors
+      // update button colors to reflect changes
       d3.select(".filter_buttons")
         .selectAll("input")
         .style("background-color", (d) => {
