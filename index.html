@@ -6,6 +6,7 @@
     <script src="https://d3js.org/d3.v4.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/d3-simple-slider"></script>
     <link rel="stylesheet" type="text/css" href="styles.css" />
   </head>
   <body>
@@ -24,18 +25,28 @@
         </div>
         <div class="axis-selector1-container">
           <div>
-            <button class="axis-selector" id="xSelector">
+            <button class="axis-selector" id="xSelector" disabled="true">
               X-Axis Attribute
             </button>
           </div>
         </div>
         <div class="axis-selector2-container">
           <div>
-            <button class="axis-selector" id="ySelector">
+            <button class="axis-selector" id="ySelector" disabled="true">
               Y-Axis Attribute
             </button>
           </div>
         </div>
+        <button
+          class="min-track-selector"
+          id="min-track-slider-container"
+          disabled="true"
+        >
+          Minimum Songs per Film
+          <div class="row align-items-center">
+            <div class="col-sm"><div id="slider-step"></div></div>
+          </div>
+        </button>
       </div>
       <div class="matrix-container">
         <svg id="matrix"></svg>

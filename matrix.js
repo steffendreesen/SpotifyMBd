@@ -86,7 +86,7 @@ d3.csv("Genre_distances_no_tempo_fewer_genres.csv", function (dataset) {
     .attr("font-size", "13px");
 
   //var myColor = d3.scaleLinear().domain([0, 20]).range(["#4713a8", "white"]);
-  var myColor = d3.scaleLinear().domain([0, 4]).range(["white", "green"]);
+  var myColor = d3.scaleLinear().domain([0, 1.5]).range(["white", "#62c083"]);
 
   /*
     svg.selectAll()

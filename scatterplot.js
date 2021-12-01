@@ -1,5 +1,5 @@
 const circleRadius = 3;
-const minTracks = 2;
+var minTracks = 2;
 const genres = [
   "Drama",
   "Comedy",
@@ -83,7 +83,7 @@ d3.csv("movie_data.csv", function (dataset) {
     margin: {
       top: 10,
       bottom: 65,
-      right: 0,
+      right: 35,
       left: 32,
     },
     width: 720,
@@ -292,7 +292,7 @@ d3.csv("movie_data.csv", function (dataset) {
     .selectAll("circle")
     .data(dataset)
     .enter()
-    .filter((d) => d.Num_Tracks >= minTracks)
+    //.filter((d) => d.Num_Tracks >= minTracks)
     .append("circle")
     .attr("cx", (d) => xScale(xAccessor(d)))
     .attr("cy", (d) => yScale(yAccessor(d)))
@@ -300,7 +300,7 @@ d3.csv("movie_data.csv", function (dataset) {
       return myColor(d.Genre_1);
     })
     // if all the boxes start unchecked, this should be 0
-    .attr("r", circleRadius)
+    .attr("r", (d) => (d.Num_Tracks >= minTracks ? circleRadius : 0))
     .attr("class", (d) => {
       return d.Genre_1;
     })
@@ -386,20 +386,21 @@ d3.csv("movie_data.csv", function (dataset) {
     .style("background-color", function (d) {
       return myColor(d);
     })
-    .style("font-size", "20px")
+    .style("font-size", "16px")
     .style("color", (d) => {
       if (d == "Adult" || d == "Short") {
         return "white";
       }
     })
-    .style("padding", "7px")
+    .style("padding", "4px")
     .style("margin", "2px")
     .attr("id", function (d) {
       return d;
     })
     .attr("value", function (d) {
       return d;
-    });
+    })
+    .classed("genre-button", true);
 
   /* Create a dropdown button for the x and y axis */
   var xSelector = d3
@@ -445,6 +446,40 @@ d3.csv("movie_data.csv", function (dataset) {
     updateGraph("y", selectedAttribute);
   });
 
+  //slider for minTracks
+  var sliderStep = d3
+    .sliderBottom()
+    .min(1)
+    .max(10)
+    .width(285)
+    .tickFormat(d3.format("1"))
+    .ticks(10)
+    .step(1)
+    .default(2)
+    .on("onchange", (val) => {
+      minTracks = val;
+      dots
+        .transition()
+        .duration(50)
+        .attr("r", (d) => {
+          if (genreExclusionSet.has(d.Genre_1) || d.Num_Tracks < minTracks) {
+            return 0;
+          } else {
+            return circleRadius;
+          }
+        });
+    });
+
+  var gStep = d3
+    .select("div#slider-step")
+    .append("svg")
+    .attr("width", 333)
+    .attr("height", 65)
+    .append("g")
+    .attr("transform", "translate(30,30)");
+
+  gStep.call(sliderStep);
+
   // hides all dots except for those belonging to genre1 or genre2
   function show_two_genres(genre1, genre2) {
     genreExclusionSet.clear();
@@ -455,7 +490,10 @@ d3.csv("movie_data.csv", function (dataset) {
       .transition()
       .duration(500)
       .attr("r", (d) => {
-        if (genreExclusionSet.has(genreAccessor(d))) {
+        if (
+          genreExclusionSet.has(genreAccessor(d)) ||
+          d.Num_Tracks < minTracks
+        ) {
           return 0;
         } else {
           return circleRadius;
@@ -500,7 +538,10 @@ d3.csv("movie_data.csv", function (dataset) {
         .transition()
         .duration(500)
         .attr("r", (d) => {
-          if (genreExclusionSet.has(genreAccessor(d))) {
+          if (
+            genreExclusionSet.has(genreAccessor(d)) ||
+            d.Num_Tracks < minTracks
+          ) {
             return 0;
           } else {
             return circleRadius;
@@ -602,7 +643,7 @@ function show_two_genres(genre1, genre2) {
     .attr("r", (d) => {
       var genre = d.Genre_1;
 
-      if (genreExclusionSet.has(genre)) {
+      if (genreExclusionSet.has(genre) || d.Num_Tracks < minTracks) {
         return 0;
       } else {
         return circleRadius;
