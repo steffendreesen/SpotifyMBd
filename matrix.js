@@ -161,11 +161,11 @@ d3.csv("Genre_distances_no_tempo_fewer_genres.csv", function (dataset) {
       // update the old and new buttons
       old_button.classed("selectedButton", false);
       old_button.classed("unselectedButton", true);
-      old_button.style("fill", matrixColor(old_distance));
+      old_button.style("fill", myColor(old_distance));
 
       button.classed("unselectedButton", false);
       button.classed("selectedButton", true);
-      button.style("fill", "white");
+      button.style("fill", "gold");
     }
   };
 
