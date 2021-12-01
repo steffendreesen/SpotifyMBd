@@ -88,11 +88,6 @@ d3.csv("Genre_distances_no_tempo_fewer_genres.csv", function (dataset) {
   //var myColor = d3.scaleLinear().domain([0, 20]).range(["#4713a8", "white"]);
   var myColor = d3.scaleLinear().domain([0, 1.5]).range(["white", "#62c083"]);
 
-  var matrixColor = d3.scaleSequential()
-                .domain([0, 4])
-                .interpolator(d3.interpolateViridis);
-
-
   /*
     svg.selectAll()
         .data(dataset)
@@ -107,13 +102,11 @@ d3.csv("Genre_distances_no_tempo_fewer_genres.csv", function (dataset) {
 
   // function is called when a rect is hovered over
   var mouseover = function () {
-    d3.select(this)
-      .attr("stroke-width", 4)
+    d3.select(this).attr("stroke-width", 4);
   };
 
   var mouseout = function () {
-    d3.select(this)
-      .attr("stroke-width", 1)
+    d3.select(this).attr("stroke-width", 1);
   };
 
   // first button clicked
@@ -140,7 +133,7 @@ d3.csv("Genre_distances_no_tempo_fewer_genres.csv", function (dataset) {
 
       button.classed("unselectedButton", false);
       button.classed("selectedButton", true);
-      button.style("fill", "white");
+      button.style("fill", "gold");
       return;
     }
 
@@ -205,7 +198,7 @@ d3.csv("Genre_distances_no_tempo_fewer_genres.csv", function (dataset) {
         .attr("height", yScale.bandwidth())
         .attr("stroke", "black")
         .attr("stroke-width", 1)
-        .style("fill", matrixColor(distance))
+        .style("fill", myColor(distance))
         .on("mouseover", mouseover)
         .on("mouseout", mouseout)
         .on("click", clicked);
