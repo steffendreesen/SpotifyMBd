@@ -78,6 +78,15 @@ body {
   margin-bottom: 10px;
 }
 
+.genre-button {
+  width: 100px;
+}
+
+.genre-button:hover {
+  border-color: black;
+  opacity: 75%;
+}
+
 .axis-selector1-container {
   margin-bottom: 10px;
 }
@@ -86,27 +95,26 @@ body {
   margin-bottom: 10px;
 }
 
-.about-text{
+.about-text {
   font-size: 30px;
-  font-family: 'Times New Roman', Times, serif;
-
+  font-family: "Times New Roman", Times, serif;
 }
 
-.vis-descriptions{
+.vis-descriptions {
   text-align: left;
 }
 
-.click{
+.click {
   text-align: center;
   font-size: large;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
 }
 
-.top-banner-title{
+.top-banner-title {
   display: inline;
 }
 
-.toggle-button-div{
+.toggle-button-div {
   padding-left: 3px;
   padding-right: 3px;
   border: 3px solid black;
@@ -116,7 +124,7 @@ body {
   margin-right: 15px;
 }
 
-.toggle-button-div:hover{
+.toggle-button-div:hover {
   border: 3px solid white;
   color: white;
   cursor: pointer;
@@ -131,8 +139,8 @@ body {
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Faddllback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  background-color: rgb(0, 0, 0); /* Faddllback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
 .modal-content {
