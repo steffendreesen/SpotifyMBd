@@ -91,6 +91,22 @@ body {
   margin-bottom: 10px;
 }
 
+.axis-selector {
+  font-size: 22px;
+}
+
+.axis-selector:disabled {
+  color: black;
+}
+
+.min-track-selector {
+  font-size: 22px;
+}
+
+.min-track-selector:disabled {
+  color: black;
+}
+
 .axis-selector2-container {
   margin-bottom: 10px;
 }
