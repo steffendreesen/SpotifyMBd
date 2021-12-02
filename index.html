@@ -2,79 +2,153 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>SpotifyMDb: Projecct Description</title>
+    <title>SpotifyMDb</title>
     <script src="https://d3js.org/d3.v4.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/d3-simple-slider"></script>
     <link rel="stylesheet" type="text/css" href="styles.css" />
   </head>
   <body>
+
+    <div id="desc" class="modal">
+      <div class="modal-content">
+        <span class="close">&times</span>
+          <div class = "about-text">     
+            <p>
+                <h1> Project Goal: </h1>
+                <strong>
+                    <thread>The goal of this project is to examine and visualize the relationship between 
+                        movie genre and soundtrack.  More specifically, we wanted to create 
+                        meaningful visualizations that allow the viewer to easily observe relationships 
+                        and trends between movie genre and song selection.  Furthermore, we wanted to create 
+                        easy to use but effective visualizations that allow the user to filter and choose
+                        what data they can see as well as interact with.  
+                    </thread>
+                </strong>
+            </p>   
+    
+            <p>
+                <h1>Background Information:</h1>
+                <strong>
+                    <thread>
+                        
+                    </thread>
+                </strong>
+                
+            </p>
+            <p>
+                <h1>Description of Each Visualization</h1>
+                <strong>
+                    <thread>
+                        Each visualization has an intended use, and are best utilized when 
+                        paired with the other visualizations on this site as well.  For example,
+                        the best way for a user who is curious about how the soundtracks in 
+                        horror movies differed from the soundtracks in comedy movies, then the user 
+                        would click on the cell in the matrix that corresponded to the horror and 
+                        comedy genres.  When using this matrix, it is important to be aware that the
+                        darker green a cell is, the more the difference is noticable for the two 
+                        movie genres that cell is associated with.  The radar, to the left, will then 
+                        show the user which specific attributes the soundtracks had differences in, and then 
+                        by how much.  For example, the soundtracks for comedy movies had an accoustic 
+                        value of 0.3, whereas the soundtracks for horror movies only had an accoustic value
+                        of 0.2, meaning the average difference for how accoustic the soundtracks of 
+                        horror movies and comedy movies was only a value of 0.1.  Then, the user can select 
+                        these genres from the scatterplot, as well as the corresponding attributes, and see
+                        how the scatterplot visualoizes this for the soundtrack of each comedy and horror movie
+                        in the dataset. 
+                    </thread>
+                </strong>
+                
+            </p>
+    
+            <p>
+                <h1>Calculations: </h1>
+                <strong>
+                    <thread>
+                        /*Add text here*/
+                    </thread>
+                </strong>
+            </p>
+            
+        </div>
+      </div>
+    </div>
+
+
     <div class="top-banner">
+      <div class="top-banner-title">
       CPSC 4030 Data Visualization Project: SpotifyMDb
+      </div>
+      <div id="about" class="toggle-button-div">About</div>
     </div>
 
-
-    <div class = "text">     
-        <p>
-            <h1> Project Goal: </h1>
-            <strong>
-                <thread>The goal of this project is to examine and visualize the relationship between 
-                    movie genre and soundtrack.  More specifically, we wanted to create 
-                    meaningful visualizations that allow the viewer to easily observe relationships 
-                    and trends between movie genre and song selection.  Furthermore, we wanted to create 
-                    easy to use but effective visualizations that allow the user to filter and choose
-                    what data they can see as well as interact with.  
-                </thread>
-            </strong>
-        </p>   
-
-        <p>
-            <h1>Background Information:</h1>
-            <strong>
-                <thread>
-                     
-                </thread>
-            </strong>
-            
-        </p>
-        <p>
-            <h1>Description of Each Visualization</h1>
-            <strong>
-                <thread>
-                    Each visualization has an intended use, and are best utilized when 
-                    paired with the other visualizations on this site as well.  For example,
-                    the best way for a user who is curious about how the soundtracks in 
-                    horror movies differed from the soundtracks in comedy movies, then the user 
-                    would click on the cell in the matrix that corresponded to the horror and 
-                    comedy genres.  When using this matrix, it is important to be aware that the
-                    darker green a cell is, the more the difference is noticable for the two 
-                    movie genres that cell is associated with.  The radar, to the left, will then 
-                    show the user which specific attributes the soundtracks had differences in, and then 
-                    by how much.  For example, the soundtracks for comedy movies had an accoustic 
-                    value of 0.3, whereas the soundtracks for horror movies only had an accoustic value
-                    of 0.2, meaning the average difference for how accoustic the soundtracks of 
-                    horror movies and comedy movies was only a value of 0.1.  Then, the user can select 
-                    these genres from the scatterplot, as well as the corresponding attributes, and see
-                    how the scatterplot visualoizes this for the soundtrack of each comedy and horror movie
-                    in the dataset. 
-                </thread>
-            </strong>
-            
-        </p>
-
-        <p>
-            <h1>Calculations: </h1>
-            <strong>
-                <thread>
-                    /*Add text here*/
-                </thread>
-            </strong>
-        </p>
-        
+    <div class="wrapper">
+      <div class="scatter-container">
+        <svg id="scatterplot"></svg>
+      </div>
+      <div class="radar-container">
+        <canvas id="radar"></canvas>
+        <div class="button-container">
+          <div id="filter_buttons" class="filter_buttons"></div>
+        </div>
+        <div class="axis-selector1-container">
+          <div>
+            <button class="axis-selector" id="xSelector" disabled="true">
+              X-Axis Attribute
+            </button>
+          </div>
+        </div>
+        <div class="axis-selector2-container">
+          <div>
+            <button class="axis-selector" id="ySelector" disabled="true">
+              Y-Axis Attribute
+            </button>
+          </div>
+        </div>
+        <button
+          class="min-track-selector"
+          id="min-track-slider-container"
+          disabled="true"
+        >
+          Minimum Songs per Film
+          <div class="row align-items-center">
+            <div class="col-sm"><div id="slider-step"></div></div>
+          </div>
+        </button>
+      </div>
+      <div class="matrix-container">
+        <svg id="matrix"></svg>
+      </div>
     </div>
+  </body>
 
-    <div class="click">
-        <a href = 'visualization.html'> Click here to view our visualizations!</a>
-    </div>
+  <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 
+  <script src="scatterplot.js"></script>
+  <script src="radar.js"></script>
+  <script src="matrix.js"></script>
+
+  
+  <script>
+    var toggle = document.getElementById("about");
+
+    var modal = document.getElementById("desc");
+
+    var span = document.getElementsByClassName("close")[0];
+
+    toggle.onclick = function(){
+      modal.style.display = "block";
+    }
+
+    span.onclick = function() {
+      modal.style.display = "none";
+    } 
+
+    window.onclick = function(event) {
+     if (event.target == modal) {
+      modal.style.display = "none";
+     }
+    }
+  </script>
 </html>

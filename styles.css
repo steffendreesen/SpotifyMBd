@@ -86,9 +86,9 @@ body {
   margin-bottom: 10px;
 }
 
-.text{
+.about-text{
   text-align: center;
-  font-size: large;
+  font-size: 30px;
   font-family: 'Times New Roman', Times, serif;
   
 }
@@ -96,4 +96,59 @@ body {
   text-align: center;
   font-size: large;
   font-family: 'Times New Roman', Times, serif;
+}
+
+.top-banner-title{
+  display: inline;
+}
+
+.toggle-button-div{
+  padding-left: 3px;
+  padding-right: 3px;
+  border: 3px solid black;
+  font-weight: bolder;
+  display: inline;
+  float: right;
+  margin-right: 15px;
+}
+
+.toggle-button-div:hover{
+  border: 3px solid white;
+  color: white;
+  cursor: pointer;
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Faddllback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 10% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 95%; /* Could be more or less, depending on screen size */
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
