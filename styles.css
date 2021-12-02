@@ -131,10 +131,12 @@ body {
 }
 
 .toggle-button-div {
-  padding-left: 3px;
-  padding-right: 3px;
+  font-size: 35px;
+  border-radius: 50%;
+  padding-left: 13px;
+  padding-right: 13px;
   border: 3px solid black;
-  font-weight: bolder;
+  font-weight: bold;
   display: inline;
   float: right;
   margin-right: 15px;
