@@ -14,53 +14,39 @@
     <div id="desc" class="modal">
       <div class="modal-content">
         <span class="close">&times</span>
-          <div class = "about-text">     
-            <p>
-                <h1> Project Goal: </h1>
-                <strong>
-                    <thread> We aim to determine relationships between different genres of movies and their soundtracks by 
-                      designing interactive visualizations that faciliate the exploration of our SpotifyMDB dataset.
-                    </thread>
-                </strong>
-            </p>   
-    
-            <p>
-                <h1>Background Information:</h1>
-                <strong>
-                    <thread>
-                        
-                    </thread>
-                </strong>
-                
-            </p>
-            <p>
-                <h1>Description of Each Visualization</h1>
-                <strong>
-                    <thread>
-                        <ul class="vis-descriptions">
-                          <li>Genre Similarity Matrix: Shows calculated distance between the average soundtrack of two genres</li>
-                          <li>Radar Chart: Uses a polygon shape to contrast
-                             the average attributes of two genres </li>
-                          <li>Scatterplot: The X and Y axis each show a musical attribute from the dataset. Every movie soundtrack 
-                            in our dataset has its own point on the scatterplot. Points are color-encoded by genre. Hovering over
-                            a point show the movie title and the values of the two selected attributes.
-                          </li>
-                        </ul>
-  
-                    </thread>
-                </strong>
-                
-            </p>
-    
-            <p>
-                <h1>Calculations: </h1>
+          <div class = "about-text">  
+            <div class="about-text-goal">
+              <p>
+                  <h1> Project Goal</h1>
+                  <strong>
+                      <thread> We aim to identify relationships between different genres of movies and their soundtracks by 
+                        designing interactive visualizations that faciliate the exploration of our SpotifyMDb dataset.
+                      </thread>
+                  </strong>
+              </p>
+            </div>   
+            <div class="about-recommended">
+              <p>
+                  <h1>Recommended Use</h1>
+                  <strong>
+                      <thread>
+                        <img src="flow-diagram.png" class="about-recommended-picture"/>
+                      </thread>
+                  </strong>
+              </p>  
+            </div>
+            <div class="about-recommended-text">
+              <p>
                 <strong>
                     <thread>
-                        /*Add text here*/
+                      <p>1. Start by selecting a cell in the similarity matrix that seems interesting.</p>
+                      <p>2. Using the radar, identify attributes where the two genres differ.</p>
+                      <p>3. Update the scatter plot axes to the attributes identified from the radar.</p>
+                      <p>4. Add or remove genres, adjust the minimum tracks required, and change the axis attributes to further explore the dataset!</p>
                     </thread>
                 </strong>
-            </p>
-            
+            </p>  
+            </div>        
         </div>
       </div>
     </div>

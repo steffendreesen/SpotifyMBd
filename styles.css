@@ -112,8 +112,35 @@ body {
 }
 
 .about-text {
-  font-size: 30px;
-  font-family: "Times New Roman", Times, serif;
+  font-size: 22px;
+  /* font-family: "Times New Roman", Times, serif; */
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+.about-text-goal {
+  text-align: center;
+  margin-left: 15%;
+  margin-right: 15%;
+}
+
+.about-recommended {
+  text-align: center;
+  align-items: center;
+}
+
+.about-recommended-picture {
+  margin-left: 2%;
+  margin-right: 2%;
+  max-width: 80%;
+  height: auto;
+}
+
+.about-recommended-text {
+  margin-left: 20%;
+  margin-right: 20%;
+  max-width: 80%;
+  line-height: 32px;
 }
 
 .vis-descriptions {
