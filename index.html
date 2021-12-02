@@ -18,12 +18,8 @@
             <p>
                 <h1> Project Goal: </h1>
                 <strong>
-                    <thread>The goal of this project is to examine and visualize the relationship between 
-                        movie genre and soundtrack.  More specifically, we wanted to create 
-                        meaningful visualizations that allow the viewer to easily observe relationships 
-                        and trends between movie genre and song selection.  Furthermore, we wanted to create 
-                        easy to use but effective visualizations that allow the user to filter and choose
-                        what data they can see as well as interact with.  
+                    <thread> We aim to determine relationships between different genres of movies and their soundtracks by 
+                      designing interactive visualizations that faciliate the exploration of our SpotifyMDB dataset.
                     </thread>
                 </strong>
             </p>   
@@ -41,22 +37,16 @@
                 <h1>Description of Each Visualization</h1>
                 <strong>
                     <thread>
-                        Each visualization has an intended use, and are best utilized when 
-                        paired with the other visualizations on this site as well.  For example,
-                        the best way for a user who is curious about how the soundtracks in 
-                        horror movies differed from the soundtracks in comedy movies, then the user 
-                        would click on the cell in the matrix that corresponded to the horror and 
-                        comedy genres.  When using this matrix, it is important to be aware that the
-                        darker green a cell is, the more the difference is noticable for the two 
-                        movie genres that cell is associated with.  The radar, to the left, will then 
-                        show the user which specific attributes the soundtracks had differences in, and then 
-                        by how much.  For example, the soundtracks for comedy movies had an accoustic 
-                        value of 0.3, whereas the soundtracks for horror movies only had an accoustic value
-                        of 0.2, meaning the average difference for how accoustic the soundtracks of 
-                        horror movies and comedy movies was only a value of 0.1.  Then, the user can select 
-                        these genres from the scatterplot, as well as the corresponding attributes, and see
-                        how the scatterplot visualoizes this for the soundtrack of each comedy and horror movie
-                        in the dataset. 
+                        <ul class="vis-descriptions">
+                          <li>Genre Similarity Matrix: Shows calculated distance between the average soundtrack of two genres</li>
+                          <li>Radar Chart: Uses a polygon shape to contrast
+                             the average attributes of two genres </li>
+                          <li>Scatterplot: The X and Y axis each show a musical attribute from the dataset. Every movie soundtrack 
+                            in our dataset has its own point on the scatterplot. Points are color-encoded by genre. Hovering over
+                            a point show the movie title and the values of the two selected attributes.
+                          </li>
+                        </ul>
+  
                     </thread>
                 </strong>
                 

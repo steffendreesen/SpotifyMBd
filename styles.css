@@ -87,11 +87,15 @@ body {
 }
 
 .about-text{
-  text-align: center;
   font-size: 30px;
   font-family: 'Times New Roman', Times, serif;
-  
+
 }
+
+.vis-descriptions{
+  text-align: left;
+}
+
 .click{
   text-align: center;
   font-size: large;
