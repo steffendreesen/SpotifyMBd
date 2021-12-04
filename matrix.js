@@ -33,7 +33,7 @@ d3.csv("Genre_distances_no_tempo_fewer_genres.csv", function (dataset) {
   var dimensions = {
     margin: {
       top: 10,
-      bottom: 105,
+      bottom: 80,
       right: 0,
       left: 85,
     },
@@ -85,20 +85,11 @@ d3.csv("Genre_distances_no_tempo_fewer_genres.csv", function (dataset) {
     .style("transform", `translateX(${dimensions.margin.left}px)`)
     .attr("font-size", "13px");
 
-  //var myColor = d3.scaleLinear().domain([0, 20]).range(["#4713a8", "white"]);
-  var myColor = d3.scaleLinear().domain([0, 1.5]).range(["white", "#62c083"]);
-
-  /*
-    svg.selectAll()
-        .data(dataset)
-        .enter()
-        .append('rect')
-        .attr("x", function(d) { return xScale(d[""]) })
-        .attr("y", function(d) { return yScale(d[""]) })
-        .attr("width", xScale.bandwidth() )
-        .attr("height", yScale.bandwidth() )
-        .style("fill", function(d) { return myColor(700)} )
-    */
+  var myColor = d3
+    .scalePow()
+    .exponent(0.5)
+    .domain([0, 1])
+    .range(["white", "#62c083"]);
 
   // function is called when a rect is hovered over
   var mouseover = function () {
@@ -170,7 +161,6 @@ d3.csv("Genre_distances_no_tempo_fewer_genres.csv", function (dataset) {
   };
 
   // Set up Matrix
-
   // loop through all genres
   for (var i = 0; i < genres.length; i++) {
     // current genre
@@ -204,4 +194,27 @@ d3.csv("Genre_distances_no_tempo_fewer_genres.csv", function (dataset) {
         .on("click", clicked);
     }
   }
+
+  //color legend
+  var pow = d3
+    .scalePow()
+    .exponent(0.5)
+    .domain([0, 1])
+    .range(["white", "#62c083"]);
+
+  var svg = d3.select("#legend");
+
+  svg.append("g").attr("class", "legendPow");
+  //.attr("transform", "translate(250,0)");
+
+  var legendPow = d3
+    .legendColor()
+    .labels(["100%", "90%", "80%", "70%", "60%", "< 50%"])
+    .shapeWidth(50)
+    .shapePadding(7)
+    .cells([0, 1, 2, 3, 4, 5])
+    .orient("horizontal")
+    .scale(pow);
+
+  svg.select(".legendPow").call(legendPow);
 });

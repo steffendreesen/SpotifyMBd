@@ -46,6 +46,7 @@ body {
   height: 1fr;
   border: 2px solid black;
 }
+
 .matrix-container {
   /* width: 500px !important;
   height: 500px !important; */
@@ -208,4 +209,19 @@ body {
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+.legend-title {
+  margin-left: 350px;
+  margin-top: 0px;
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+.legend {
+  margin-left: 200px;
+  margin-bottom: 0px;
+  width: 500px !important;
 }
