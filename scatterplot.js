@@ -83,23 +83,29 @@ d3.csv("movie_data.csv", function (dataset) {
     margin: {
       top: 10,
       bottom: 65,
-      right: 35,
-      left: 32,
+      right: 50,
+      left: 35,
     },
-    width: 720,
-    height: 835,
+    width: 0,
+    height: 0,
   };
 
   // scatterplot
   var svg = d3
     .select("#scatterplot")
-    .attr("width", dimensions.width)
-    .attr("height", dimensions.height)
+    .attr("width", "36vw")
+    .attr("height", "90vh")
     .append("g")
     .attr(
       "transform",
       "translate(" + dimensions.margin.left + "," + dimensions.margin.top + ")"
     );
+
+  let scatter_dims = document
+    .getElementById("scatterplot")
+    .getBoundingClientRect();
+  dimensions.width = scatter_dims.width;
+  dimensions.height = scatter_dims.height;
 
   // tooltip div, position is changed when dots are hovered over
   var div = d3
@@ -446,12 +452,18 @@ d3.csv("movie_data.csv", function (dataset) {
     updateGraph("y", selectedAttribute);
   });
 
+  let slider_dims = document
+    .getElementById("xSelector")
+    .getBoundingClientRect();
+  slider_width = slider_dims.width;
+
   //slider for minTracks
   var sliderStep = d3
     .sliderBottom()
     .min(1)
     .max(10)
-    .width(285)
+    //.width(slider_width)
+    .width(slider_width)
     .tickFormat(d3.format("1"))
     .ticks(10)
     .step(1)
@@ -471,12 +483,13 @@ d3.csv("movie_data.csv", function (dataset) {
     });
 
   var gStep = d3
-    .select("div#slider-step")
+    .select("#slider-step")
     .append("svg")
-    .attr("width", 333)
+    .attr("width", "22vw")
     .attr("height", 65)
     .append("g")
-    .attr("transform", "translate(30,30)");
+    .attr("transform", "translate(35,10)")
+    .attr("class", "horizontal-slider");
 
   gStep.call(sliderStep);
 
@@ -516,7 +529,7 @@ d3.csv("movie_data.csv", function (dataset) {
 
         //update buttons
         if (genre == "All") {
-          console.log("genre == all");
+          //console.log("genre == all");
           genres.forEach((g) => genreExclusionSet.add(g));
         }
 
@@ -526,7 +539,7 @@ d3.csv("movie_data.csv", function (dataset) {
 
         //update buttons
         if (genre == "All") {
-          console.log("genre == all");
+          //console.log("genre == all");
 
           genres.forEach((g) => genreExclusionSet.delete(g));
         }
@@ -629,7 +642,7 @@ d3.csv("movie_data.csv", function (dataset) {
 function show_two_genres(genre1, genre2) {
   var dots = d3.select("#scatterplot").select("g").selectAll("circle");
 
-  console.log(genres);
+  //console.log(genres);
 
   genreExclusionSet.clear();
   genres.forEach((g) => genreExclusionSet.add(g));

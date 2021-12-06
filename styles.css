@@ -24,6 +24,7 @@ body {
 .top-banner {
   background-color: #62c083;
   padding: 10px;
+  height: 7vh;
   text-align: center;
   font-size: 40px;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
@@ -31,37 +32,31 @@ body {
 }
 
 .radar-container {
-  /* width: 500px !important;
-  height: 500px !important; */
-  width: 1fr;
-  height: 1fr;
+  max-width: 24vw;
+  /* height: 120vh; */
   border-top: 2px solid black;
-  border-bottom: 2px solid black;
+  /* border-bottom: 2px solid black; */
 }
 
 .scatter-container {
-  /* width: 500px !important;
-  height: 500px !important; */
-  width: 1fr;
-  height: 1fr;
-  border: 2px solid black;
+  max-width: 38vw;
+  /* height: 120vh; */
+  border-top: 2px solid black;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
 }
 
 .matrix-container {
-  /* width: 500px !important;
-  height: 500px !important; */
-  width: 1fr;
-  height: 1fr;
-  border: 2px solid black;
+  max-width: 38vw;
+  /* height: 120vh; */
+  border-top: 2px solid black;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
 }
+
 .wrapper {
   display: grid;
-  grid-template-columns: 40% 20% 40%;
-  /* grid-template-rows: 70% 30%; */
-}
-.wrapper > div {
-  /* background: #eee; */
-  padding: 1em;
+  grid-template-columns: 38% 24% 38%;
 }
 
 .axis-label {
@@ -69,6 +64,7 @@ body {
 }
 
 .axis-selector {
+  max-width: 16vw;
   font-size: 30px;
   padding-bottom: 10px;
   padding-top: 5px;
@@ -76,7 +72,10 @@ body {
 
 .button-container {
   text-align: center;
+  margin-top: 10px;
   margin-bottom: 10px;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .genre-button {
@@ -89,6 +88,7 @@ body {
 }
 
 .axis-selector1-container {
+  text-align: center;
   margin-bottom: 10px;
 }
 
@@ -101,7 +101,17 @@ body {
 }
 
 .min-track-selector {
+  text-align: center;
+  max-width: 23vw;
   font-size: 22px;
+}
+
+/* .slider {
+  max-width: 12vw !important;
+} */
+
+.min-track-container {
+  text-align: center;
 }
 
 .min-track-selector:disabled {
@@ -109,6 +119,7 @@ body {
 }
 
 .axis-selector2-container {
+  text-align: center;
   margin-bottom: 10px;
 }
 
@@ -182,8 +193,8 @@ body {
   z-index: 1; /* Sit on top */
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
+  width: 100vw; /* Full width */
+  height: 100vh; /* Full height */
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0, 0, 0); /* Faddllback color */
   background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
@@ -212,7 +223,7 @@ body {
 }
 
 .legend-title {
-  margin-left: 350px;
+  margin-left: 7vw;
   margin-top: 0px;
   margin-bottom: 5px;
   font-size: 16px;
@@ -220,13 +231,20 @@ body {
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
+.legend-container {
+  text-align: left;
+  margin-left: 10vw;
+}
+
 .legend {
-  margin-left: 200px;
-  margin-bottom: 0px;
-  width: 500px !important;
+  min-width: 22vw;
 }
 
 .swatch {
   stroke: black;
   stroke-width: 2px;
 }
+/* 
+.slider-step {
+  margin-top: 10px;
+} */

@@ -34,17 +34,18 @@ d3.csv("Genre_distances_no_tempo_fewer_genres.csv", function (dataset) {
     margin: {
       top: 10,
       bottom: 80,
-      right: 0,
-      left: 85,
+      right: 5,
+      left: 90,
     },
-    width: 700,
-    height: 830,
+    width: 0,
+    height: 0,
   };
 
-  var svg = d3
-    .select("#matrix")
-    .attr("width", dimensions.width)
-    .attr("height", dimensions.height);
+  var svg = d3.select("#matrix").attr("width", "36vw").attr("height", "83vh");
+
+  let matrix_dims = document.getElementById("matrix").getBoundingClientRect();
+  dimensions.width = matrix_dims.width;
+  dimensions.height = matrix_dims.height;
 
   svg.append("input").attr("type", "button");
 
@@ -205,7 +206,6 @@ d3.csv("Genre_distances_no_tempo_fewer_genres.csv", function (dataset) {
   var svg = d3.select("#legend");
 
   svg.append("g").attr("class", "legendPow");
-  //.attr("transform", "translate(250,0)");
 
   var legendPow = d3
     .legendColor()
